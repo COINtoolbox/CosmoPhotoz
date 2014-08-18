@@ -22,10 +22,10 @@ require(CosmoPhotoz)
 Load the data:
 
 ```{r, echo=FALSE}
-data(PHAT0.train)
+data(PHAT0train)
 
 
-data(PHAT0.test)
+data(PHAT0test)
 ```
 
 Take a look on the data 
@@ -35,8 +35,24 @@ Take a look on the data
 
 
 ```{r, echo=FALSE}
-PC_comb<-computeCombPCA(Mega.train[,-6],Mega.test[,-6])
-specz<-Mega.test$redshift
+PC_comb<-computeCombPCA(subset(PHAT0train,select=c(-redshift)),
+                       subset(PHAT0test,select=c(-redshift)))
+```
+
+Add the redshift column to the PCA projections of the  Training sample
+
+```{r, echo=FALSE}
+Trainpc<-cbind(PC_comb$x,redshift=PHAT0train$redshift)
+
+```
+
+Store the PCA projections for the testing sample in the vector Testpc
+
+```{r, echo=FALSE}
+Testpc<-PC_comb$y
 ```
 
 
+Train  the glm model using gamma family
+
+glmfit<-glmTrainPhotoZ(Trainpc,method="Bayesian",family="gamma")

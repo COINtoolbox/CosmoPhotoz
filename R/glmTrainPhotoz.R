@@ -43,17 +43,18 @@ glmTrainPhotoZ <- function(x, method=c("Frequentist","Bayesian"), family=c("gamm
   ## Frequentist 
   if(method=="Frequentist"){
     if(family=="gamma"){
-      GLM_data <- glm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
+      GLM_data <- glm(redshift~., family=Gamma(link = "log"), data=x) 
     }
     if(family=="inverse.gaussian"){
-      GLM_data <- glm(redshift~., family=gamma(link = "log"), data=x) 
+      GLM_data <- glm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
+    
     }
   }
   
   ## Bayesian
   if(method=="Bayesian"){    
     if(family=="gamma"){
-      GLM_data <- bayesglm(redshift~., family=gamma(link="log"), data=x)
+      GLM_data <- bayesglm(redshift~., family=Gamma(link="log"), data=x)
     }
     if(family=="inverse.gaussian"){
       GLM_data <- bayesglm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
