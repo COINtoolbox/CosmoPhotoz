@@ -19,10 +19,24 @@ This is an R Markdown document to explain in simple terms the use of Generalized
 require(CosmoPhotoz)
 ```
 
-You can also embed plots, for example:
+Load the data:
 
 ```{r, echo=FALSE}
-plot(cars)
+data(PHAT0.train)
+
+
+data(PHAT0.test)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Take a look on the data 
+
+
+
+
+
+```{r, echo=FALSE}
+PC_comb<-computeCombPCA(Mega.train[,-6],Mega.test[,-6])
+specz<-Mega.test$redshift
+```
+
+
