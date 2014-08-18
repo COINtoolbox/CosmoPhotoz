@@ -32,7 +32,7 @@ photoz.diagnostic <- function(photoz, specz){
   if( ! is.vector(photoz) ) {
     stop("Error in photoz.diagnostic :: photoz is not a vector, and the code expects a vector.")
   }
-  if( ! is.vectore(specz) ) {
+  if( ! is.vector(specz) ) {
     stop("Error in photoz.diagnostic :: specz is not a vector, and the code expects a vector.")
   }
 
