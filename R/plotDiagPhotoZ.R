@@ -27,7 +27,7 @@
 #
 # A ggplot  object 
 
-plot_photoz <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins")) {
+plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins")) {
   
   # First some basic error control
   if( ! (type %in% c("errordist", "predobs", "errorviolins"))) {

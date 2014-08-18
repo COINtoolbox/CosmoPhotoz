@@ -26,7 +26,7 @@
 #
 # A GLM fit for photo-z
 
-Predict.redshift <- function(data, train){
+glmPredictPhotoZ <- function(data, train){
 	
  	# First some basic error control
  	if( ! is.data.frame(data) ) {

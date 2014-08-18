@@ -26,7 +26,7 @@
 #
 # A list of summary statistics for  photo-z estimation
 
-photoz.diagnostic <- function(photoz, specz){
+computeDiagPhotoZ <- function(photoz, specz){
 
   # First some basic error control
   if( ! is.vector(photoz) ) {

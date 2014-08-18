@@ -33,7 +33,7 @@
 #
 # A list of PCA projections for each matrix
 
-CombPCA <- function(x, y) {
+computeCombPCA <- function(x, y) {
 
   # First some basic error control
   if(!is.matrix(x)&!is.data.frame(x)) {
