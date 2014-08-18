@@ -26,7 +26,7 @@
 #
 # A GLM fit for photo-z
 
-glmTrainPhotoz <- function(x, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
+glmTrainPhotoZ <- function(x, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
 
   # First some basic error control
   if( ! (method %in% c("Frequentist","Bayesian"))) {
