@@ -43,8 +43,8 @@ plot_photoz <- function(photoz, specz, type=c("errordist", "predobs", "errorviol
   # Now, for the real work
   # If the user wants to plot the error distributions
   if(type=="errordist") {
-    sig <- data.frame(sigma=(specz-photoz)/(1+specz))
-    g1 <- ggplot(sig,x=sigma) + geom_density(aes(x=sigma),fill="cyan") + coord_cartesian(c(-1, 1)) +
+    sig <- data.frame(sigma=(photoz-specz)/(1+specz))
+    g1 <- ggplot(sig,x=sigma) + geom_density(aes(x=sigma),fill="darkmagenta", alpha=0.4) + coord_cartesian(c(-1, 1)) +
       xlab(expression((z[phot]-z[spec])/(1+z[spec]))) +
       theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
       theme(plot.title = element_text(hjust=0.5),
@@ -53,7 +53,7 @@ plot_photoz <- function(photoz, specz, type=c("errordist", "predobs", "errorviol
           text = element_text(size=20))
     return(g1)
   }
-
+  
   # If the user wants to plot the predicted versus the reference values
   if(type=="predobs") {
     comb <- cbind(specz,photoz)
@@ -61,19 +61,32 @@ plot_photoz <- function(photoz, specz, type=c("errordist", "predobs", "errorviol
     comb <- as.data.frame(comb)
     p1 <- ggplot(comb,aes(x=zspec,y=zphot))
     p2 <- p1 + stat_density2d(bins=200,geom="polygon",aes(fill =..level..,alpha=..level..),na.rm = TRUE,trans="log",n = 250,contour = TRUE) +
-      coord_cartesian(c(0.3, 0.8), c(0.41, 0.71))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
-      scale_fill_gradient2(guide="none",low = "red",mid="cyan",high = "blue2",space = "Lab") +
-      geom_abline(intercept = 0)+theme(legend.text = element_text(colour="gray40"),legend.title=element_blank(),text = element_text(size=20),legend.position=c(0.1,0.75),axis.line = element_line(color = 'black')) +
-      geom_density2d(colour="gray60",alpha=0.3, breaks = c(1, 5,10,25,50,100,200,250))+theme_gdocs() +
+      coord_cartesian(c(min(specz), max(specz)), c(min(photoz), max(photoz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
+      scale_fill_gradient2(guide="none",low = rgb(191/255, 211/255, 230/255), mid=rgb(158/255, 188/255, 218/255), high = rgb(129/255, 15/255, 124/255),space = "rgb") +
+      geom_abline(intercept = 0)+theme(legend.text = element_text(colour="gray40"), legend.title=element_blank(), text = element_text(size=20),legend.position=c(0.1,0.75),axis.line = element_line(color = 'black')) +
+      geom_density2d(colour="gray60", alpha=0.3, breaks = c(1, 5,10,25,50,100,200,250))+theme_gdocs() +
       scale_alpha(guide="none")
+#      scale_fill_gradient2(guide="none",low = "red",mid="cyan",high = "blue2", space = "Lab") 
     return(p2)
   }
 
   # If the user wants to plot the error distribution as violin plots within predetermined bins
-  if(type=="violins") {
-    # VIOLIN CODE HERE
-  }
-
+  if(type=="errorviolins") {
+    # Load the file
+    b2 <- factor(floor(specz * 10)/10)
+    error_photoZ <- (specz-photoz)/(1+specz)
+    dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
+    p <- ggplot(dfd) + xlab(expression(z[spec])) + ylab(expression((z[photo]-z[spec])/(1+z[spec]))) + ylim(-0.5, 0.5)
+    p <- p + theme(legend.position = "none", axis.title.x = element_text(size=15), axis.title.y = element_text(size=15))
+    p <- p + geom_violin(aes(z_spec, z_photo), fill=rgb(140/255,150/255,198/255), alpha=0.8)
+  
+    # hist_right <- ggplot(dfd) + geom_histogram(aes(z_photo), fill="dark magenta", alpha=0.4, binwidth=.001) + xlim(-0.5, 0.5)
+    # hist_right <- hist_right + coord_flip() + theme(legend.position = "none",
+    #    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.title.y = element_text(size=15)) + ylab(bquote(paste("count (x",10^3,")") ))+ scale_y_continuous(breaks=c(0,5000,10000,15000), labels=c(0, 5, 10, 15))
+    # hist_right <- hist_right + theme(plot.margin = unit(c(1, 1, 0.6, -0.5), "lines"))
+  
+    return(p)
+    }
 }
 
 

@@ -16,4 +16,5 @@ Imports:
     scales,
     arm,
     rrcovHD,
+    gridExtra
 NeedsCompilation: no
