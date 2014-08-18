@@ -46,6 +46,7 @@ Trainpc<-cbind(PC_comb$x,redshift=PHAT0train$redshift)
 
 ```
 
+
 Store the PCA projections for the testing sample in the vector Testpc
 
 ```{r, echo=FALSE}
@@ -55,4 +56,27 @@ Testpc<-PC_comb$y
 
 Train  the glm model using gamma family
 
+```{r, echo=FALSE}
 glmfit<-glmTrainPhotoZ(Trainpc,method="Bayesian",family="gamma")
+```
+
+
+
+ Here you predict your photometric redshift from your photometric data
+ 
+```{r, echo=FALSE}
+photoz<-glmPredictPhotoZ(data = Testpc, train = glmfit$glmfit)$photoz
+```
+
+Get the redshifts from the testing sample
+
+```{r, echo=FALSE}
+specz<-PHAT0test$redshift
+```
+
+
+Compute basic diagnostic statistics
+
+```{r, echo=FALSE}
+computeDiagPhotoZ(photoz, specz)
+```

@@ -48,8 +48,9 @@ computeCombPCA <- function(x, y) {
   XYPCA <- PCAgrid(XY,k=ncol(XY)-1,scale="mad",method="mad")  # Calculate the robust PCA
   X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])            # get the scores in a data frame
   Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),]) # get the scores in a data frame
-  
+  PC_95<-which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2)>=0.95)[1]
+  PC_99<-which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2)>=0.99)[1]
   # That's all folks!
-  return(list(x=X.PCA,y=Y.PCA))
+  return(list(x=X.PCA,y=Y.PCA,PC_95,PC_99))
 }
 
