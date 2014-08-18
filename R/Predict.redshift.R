@@ -16,7 +16,7 @@
 #' @title Predict photometric redshift from a GLM fit 
 #' @param  x data.frame
 #' @param train  GLM object 
-#' @return data.frame 
+#' @return list 
 #'@examples
 #'
 #' y <- rgamma(100,10,.1)
@@ -26,13 +26,22 @@
 #
 # A GLM fit for photo-z
 
-Predict.redshift<-function(data=x,train=train){
+Predict.redshift <- function(data=x, train=train){
+	
+ 	# First some basic error control
+ 	if( ! is.data.frame(x) ) {
+ 		stop("Error in Predict.redshift :: data is not a data frame, and the code expects a data frame.")
+ 	}
+ 	###### WE NEED TO CHECK IF THE train is a GLM object :: we need to verify if there is a simple way to perform this checking
+ 	
+	# Now for the real work
+	#Photoz<-predict(train,newdata=subset(data,select=-c(redshift)),type="response",se.fit = TRUE)
+	photoz <- predict(train, newdata=data, type="response", se.fit = TRUE)
+	photoz <- photoz$fit
+	err_photoz <- photoz$se.fit
 
-#Photoz<-predict(train,newdata=subset(data,select=-c(redshift)),type="response",se.fit = TRUE)
-  Photoz<-predict(train,newdata=data,type="response",se.fit = TRUE)
-  photoz<-Photoz$fit
-  err_photoz<-Photoz$se.fit
-return(list(photoz=photoz,err_photoz=err_photoz))
+	# That's all folks!
+	return(list(photoz=photoz, err_photoz=err_photoz))
 }
 
 

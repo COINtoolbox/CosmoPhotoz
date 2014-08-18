@@ -25,41 +25,45 @@
 #' @export 
 #
 # A GLM fit for photo-z
-TrainGLM<-function(x,method=c("Frequentist","Bayesian"),family=c("gamma","inverse.gaussian")){
+
+TrainGLM <- function(x, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
+
+  # First some basic error control
+  if( ! (method %in% c("Frequentist","Bayesian"))) {
+    stop("Error in TrainGLM :: the chosen method is not implemented.")
+  } 
+  if( ! (family %in% c("gamma","inverse.gaussian"))) {
+    stop("Error in TrainGLM :: the chosen family is not implemented.")
+  } 
+  if( ! is.data.frame(x) ) {
+    stop("Error in TrainGLM :: x is not a data frame, and the code expects a data frame.")
+  }
+
+  # Now, for the real work
   ## Frequentist 
   if(method=="Frequentist"){
     if(family=="gamma"){
-    
-    GLM_data<-glm(redshift~., family=inverse.gaussian(link = "1/mu^2"),data=x)
+      GLM_data <- glm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
     }
     if(family=="inverse.gaussian"){
-      GLM_data<-glm(redshift~., family=gamma(link = "log"),data=x) 
-      
+      GLM_data <- glm(redshift~., family=gamma(link = "log"), data=x) 
     }
-      
-  
   }
   
   ## Bayesian
-  if(method=="Bayesian"){
-    
+  if(method=="Bayesian"){    
     if(family=="gamma"){
-      
-      GLM_data<-bayesglm(redshift~., family=gamma(link="log"),data=x)
-      
+      GLM_data <- bayesglm(redshift~., family=gamma(link="log"), data=x)
     }
     if(family=="inverse.gaussian"){
-      GLM_data<-bayesglm(redshift~., family=inverse.gaussian(link = "1/mu^2"),data=x)
-       
-      
+      GLM_data <- bayesglm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
     }
-    
   }
-  
-#  return(summary(GLM_data))
-return(list(glmfit=GLM_data,Summary=summary(GLM_data),
- AICn= modelfit(GLM_data)$AICn,
- BICqh= modelfit(GLM_data)$BICqh))  
-  
+
+  # That's it folks!
+  # return(summary(GLM_data))
+  return(list(glmfit = GLM_data, Summary = summary(GLM_data),
+              AICn = modelfit(GLM_data)$AICn,
+              BICqh = modelfit(GLM_data)$BICqh))  
 }
 

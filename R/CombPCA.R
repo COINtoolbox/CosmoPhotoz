@@ -31,16 +31,25 @@
 #'  
 #' @export 
 #
-# A list of PCA projection for each matrix
+# A list of PCA projections for each matrix
 
-CombPCA<-function(x,y){
+CombPCA <- function(x, y) {
+
+  # First some basic error control
+  if(!is.matrix(x)&!is.data.frame(x)) {
+    stop("Error in CombPCA :: x is nor a matrix neither a data frame. The code expects a matrix or data frame.")
+  }
+  if(!is.matrix(y)&!is.data.frame(y)) {
+    stop("Error in CombPCA :: y is nor a matrix neither a data frame. The code expects a matrix or data frame.")
+  }
   
-  if(!is.matrix(x)&!is.data.frame(x))
-    stop("Need a matrix or data frame!")
-  XY<-rbind(x,y) # Combined matrix 
-  XYPCA<- PCAgrid(XY,k=ncol(XY)-1,scale="mad",method="mad")
-  X.PCA<-as.data.frame(XYPCA$scores[1:nrow(x),])
-  Y.PCA<-as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),])
+  # Now for the real work
+  XY <- rbind(x,y)                                            # Create the combined matrix 
+  XYPCA <- PCAgrid(XY,k=ncol(XY)-1,scale="mad",method="mad")  # Calculate the robust PCA
+  X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])            # get the scores in a data frame
+  Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),]) # get the scores in a data frame
+  
+  # That's all folks!
   return(list(x=X.PCA,y=Y.PCA))
 }
 

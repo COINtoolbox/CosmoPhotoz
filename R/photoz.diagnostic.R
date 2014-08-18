@@ -14,9 +14,9 @@
 #  http://www.r-project.org/Licenses/
 #
 #' @title Diagnostic for  photometric redshift fit
-#' @param  photoz data.frame
-#' @param specz  data.frame 
-#' @return data.frame 
+#' @param  photoz vector
+#' @param specz  vector
+#' @return list 
 #'@examples
 #'
 #' y <- rgamma(100,10,.1)
@@ -26,32 +26,32 @@
 #
 # A list of summary statistics for  photo-z estimation
 
-photoz.diagnostic<-function(photoz,specz){
-  # Summarize results
+photoz.diagnostic <- function(photoz, specz){
+
+  # First some basic error control
+  if( ! is.vector(photoz) ) {
+    stop("Error in photoz.diagnostic :: photoz is not a vector, and the code expects a vector.")
+  }
+  if( ! is.vectore(specz) ) {
+    stop("Error in photoz.diagnostic :: specz is not a vector, and the code expects a vector.")
+  }
+
+  # Now, for the real work
+  # Summarize results  
+  Out <- 100*length(photoz[(abs(specz-photoz))>0.15*(1+specz)])/length(specz)
   
-  Out<-100*length(photoz[(abs(specz-photoz))>0.15*(1+specz)])/length(specz)
+  # Calculate the necessary diagnostics
+  photo.mean <- abs(mean((specz-photoz)/(1+specz)))      # mean  
+  photo.sd <- sd((specz-photoz)/(1+specz))               # sd  
+  photo.median <- abs(median((specz-photoz)/(1+specz)))  # median  
+  photo.mad <- mad((specz-photoz)/(1+specz))             # mad  
+  photo.rmse <- sqrt(mean((specz-photoz)^2))             # rmse
+  photo.outliers <- paste(round(Out,2),"%",sep="")       # catastrophic errors
   
-  #Mean
-  Photo.mean<-abs(mean((specz-photoz)/(1+specz)))
-  #sd
-  Photo.sd<-sd((specz-photoz)/(1+specz))
-  #median
-  Photo.median<-abs(median((specz-photoz)/(1+specz)))
-  #mad
-  Photo.mad<-mad((specz-photoz)/(1+specz))
-  #rmse
-  Photo.rmse<-sqrt(mean((specz-photoz)^2))
-  #Catastrophic errors
-  Photo.outliers<-paste(round(Out,2),"%",sep="")
-  
-  return(list(mean=Photo.mean,sd=Photo.sd,median=Photo.median,
-              mad=Photo.mad, rmse=Photo.rmse,
-              outliers=Photo.outliers        ))
+  return(list(mean=photo.mean,sd=photo.sd,median=photo.median,
+              mad=photo.mad, rmse=photo.rmse,
+              outliers=photo.outliers))
 } 
-  
-
-
-
 
 
 
