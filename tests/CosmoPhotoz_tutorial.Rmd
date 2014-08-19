@@ -1,55 +1,27 @@
 ---
-title: "CosmoPhotoz"
-author: "Rafael S. de Souza, ..."
-date: "18 de agosto de 2014"
-output: pdf_document
+title: "Photometric Redshift with  CosmoPhotoz"
+authors: "Rafael S. de Souza, Jonny Elliot, Alberto Krone-Martins, Émille Ishida, 
+Joseph Hilbe"
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-
-
-This is an R Markdown document to explain in simple terms the use of Generalized Linear Models into Astronomy reproducing the main results from Ewan et al (2014).
-
+This is short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
 
 # Required libraries
 ```{r,results='hide',message=FALSE, cache=FALSE}
 require(CosmoPhotoz)
+require(ggplot2)
 
 ```
 
-Load the data:
+Load the PHAT0 data included in the package. Here we are using 5% of all dataset for training. 
+
 
 ```{r}
 data(PHAT0train)
 
-
 data(PHAT0test)
 ```
 
-Take a look on the data 
-
-
-```{r}
-# Read data set- PHAT0 with noise added ~170,000 objects
-PHAT0<-read.table(file="/Users/rafael/Dropbox/artigos/Meusartigos/IAA-WGC/photo_z/sim1/noise_training_big.dat",header=TRUE)
-# Magnitudes for PCA analysis. 
-colnames(PHAT0)[2]<-"redshift"
-
-PHAT0.mag<-PHAT0[,c("redshift","up","gp","rp","ip","zp","Y","J","H","K","IRAC_1","IRAC_2")]
-
-
-# Define Test and training set with caret 
-
-Partition <- createDataPartition(PHAT0$redshift, p = 0.2,list=FALSE)
-
-
-PHAT0train <- as.data.frame(PHAT0.mag[Partition, ])
-
-PHAT0test <- as.data.frame(PHAT0.mag[-Partition, ])
-```
 
 
 
@@ -58,10 +30,11 @@ PC_comb<-computeCombPCA(subset(PHAT0train,select=c(-redshift)),
                        subset(PHAT0test,select=c(-redshift)))
 ```
 
-Number of PCs to account for 95% of data
+Number of variance explained by each PC 
 ```{r}
-PCvar<-PC_comb$PCsum
+PC_comb$PCsum
 ```
+
 Add the redshift column to the PCA projections of the  Training sample
 
 ```{r}
@@ -77,35 +50,34 @@ Testpc<-PC_comb$y
 ```
 
 
-Train  the glm model using gamma family
+Train  the glm model using Gamma Family. 6 PCs explain 99.5% of data variance. In order to account for small variations in the shape, we include a polynomial term for the 2 first PCs (95% of data variance) 
 
 ```{r}
 
 Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~poly(Comp.1,2)*poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
 
-#Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
-
-#glmfit<-rq(redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,tau=0.9995,method = "pfn",data=Trainpc)
 ```
 
 
 
-Here you predict your photometric redshift from your photometric data
+Once we fit our GLM model, we can predict the redshift for the "photometric" sample
  
 ```{r, echo=FALSE}
-#photoz<-glmPredictPhotoZ(data = testpc, train = glmfit$glmfit)$photoz
+
 photoz<-predict(Fit$glmfit,newdata = Testpc,type="response")
-#photoz<-predict(glmfit,newdata = Testpc,type="response")
+
 ```
 
-Get the redshifts from the testing sample
+Store the redshift from the testing sample in the vector specz for comparison 
 
 ```{r, echo=FALSE}
 specz<-PHAT0test$redshift
 ```
 
 
-Compute basic diagnostic statistics
+Compute basic diagnostic statistics 
+
+
 
 ```{r, echo=FALSE}
 computeDiagPhotoZ(photoz, specz)
@@ -113,18 +85,26 @@ computeDiagPhotoZ(photoz, specz)
 
 
 
- Create basic comparison plots
+Create basic diagnostic   plots
+
+Kernel density distribution of the full scatter 
+ $(specz-photoz)/(1+specz)$
  
 ```{r,fig.width=8, fig.height=9}
 plotDiagPhotoZ(photoz, specz, type = "errordist")
 
 ```
 
-```{r,fig.width=8, fig.height=9}
-plotDiagPhotoZ(photoz, specz, type = "predobs")
-```
+Predicted vs Actuall values
 
 ```{r,fig.width=8, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "predobs")+coord_cartesian(xlim =c(0,1.5), ylim = c(0,1.5))
+```
+
+
+Scatter distribution as a function of redshift 
+
+```{r,fig.width=12, fig.height=9}
 plotDiagPhotoZ(photoz, specz, type = "errorviolins")
 ```
 
