@@ -30,13 +30,18 @@ glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), f
 
   # First some basic error control
   if( ! (method %in% c("Frequentist","Bayesian"))) {
-    stop("Error in TrainGLM :: the chosen method is not implemented.")
+    stop("Error in glmTrainPhotoZ :: the chosen method is not implemented.")
   } 
+<<<<<<< HEAD
   if( ! (family %in% c("gamma","inverse.gaussian","quantile"))) {
     stop("Error in TrainGLM :: the chosen family is not implemented.")
+=======
+  if( ! (family %in% c("gamma","inverse.gaussian"))) {
+    stop("Error in glmTrainPhotoZ :: the chosen family is not implemented.")
+>>>>>>> FETCH_HEAD
   } 
   if( ! is.data.frame(x) ) {
-    stop("Error in TrainGLM :: x is not a data frame, and the code expects a data frame.")
+    stop("Error in glmTrainPhotoZ :: x is not a data frame, and the code expects a data frame.")
   }
 
   # Now, for the real work

@@ -1,4 +1,4 @@
-#  R package GRAD file R/photoz.diagnostic.R
+#  R package GRAD file R/computeDiagPhotoZ.R
 #  Copyright (C) 2014  Rafael S. de Souza
 #
 #This program is free software: you can redistribute it and/or modify
@@ -30,10 +30,10 @@ computeDiagPhotoZ <- function(photoz, specz){
 
   # First some basic error control
   if( ! is.vector(photoz) ) {
-    stop("Error in photoz.diagnostic :: photoz is not a vector, and the code expects a vector.")
+    stop("Error in computeDiagPhotoZ :: photoz is not a vector, and the code expects a vector.")
   }
   if( ! is.vector(specz) ) {
-    stop("Error in photoz.diagnostic :: specz is not a vector, and the code expects a vector.")
+    stop("Error in computeDiagPhotoZ :: specz is not a vector, and the code expects a vector.")
   }
 
   # Now, for the real work

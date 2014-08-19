@@ -12,21 +12,23 @@
 
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
-#
+
 #' @title Plot Predict photometric vs observed redshift from a GLM fit 
+#'
+#' \code{plotDiagPhotoZ} returns diagnostic plots from the results of 
+#' photometric redshifts. Different types of plots are available. The 
+#' produced plots will be returned as ggplot objects.
+#' 
 #' @import ggplot2 ggthemes
 #' @param  photoz vector
 #' @param  specz vector 
 #'@param  type list 
 #' @return ggplot object  
-#'@examples
+#' @examples
 #'
-#' y <- rgamma(100,10,.1)
-#' summary(glm(y~1,family=Gamma))
-#'  
-#' @export 
-#
-# A ggplot  object 
+#' \dontrun{
+#' sum("a")
+#' }
 
 plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins","box")) {
   
