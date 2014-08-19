@@ -81,7 +81,7 @@ Train  the glm model using gamma family
 
 ```{r}
 
-Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Frequentist",family="gamma")
+Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
 
 #glmfit<-rq(redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,data=Trainpc)
 ```

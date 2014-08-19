@@ -4,7 +4,7 @@
 \title{Fit a GLM function in the training set}
 \usage{
 glmTrainPhotoZ(x, formula = NULL, method = c("Frequentist", "Bayesian"),
-  family = c("quantile", "gamma", "inverse.gaussian"))
+  family = c("gamma", "inverse.gaussian"))
 }
 \arguments{
 \item{x}{data.frame}

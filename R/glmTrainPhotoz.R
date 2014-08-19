@@ -26,20 +26,17 @@
 #
 # A GLM fit for photo-z
 
-glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), family=c("quantile","gamma","inverse.gaussian")) {
+glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
 
   # First some basic error control
   if( ! (method %in% c("Frequentist","Bayesian"))) {
     stop("Error in glmTrainPhotoZ :: the chosen method is not implemented.")
   } 
-<<<<<<< HEAD
-  if( ! (family %in% c("gamma","inverse.gaussian","quantile"))) {
-    stop("Error in TrainGLM :: the chosen family is not implemented.")
-=======
+
   if( ! (family %in% c("gamma","inverse.gaussian"))) {
-    stop("Error in glmTrainPhotoZ :: the chosen family is not implemented.")
->>>>>>> FETCH_HEAD
-  } 
+    stop("Error in TrainGLM :: the chosen family is not implemented.")
+  }
+
   if( ! is.data.frame(x) ) {
     stop("Error in glmTrainPhotoZ :: x is not a data frame, and the code expects a data frame.")
   }
@@ -55,11 +52,7 @@ glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), f
     
     }
     
-    if(family=="quantile"){
-
-      GLM_data <- rq(formula=formula, data=x)
-      
-    }
+   
     
   }
   
@@ -75,13 +68,8 @@ glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), f
 
   # That's it folks!
   # return(summary(GLM_data))
-  if(family=="quantile"){
-    return(list(glmfit = GLM_data, Summary = summary(GLM_data)
-                )) 
-    
-  }else
-  {return(list(glmfit = GLM_data, Summary = summary(GLM_data),
+  return(list(glmfit = GLM_data, Summary = summary(GLM_data),
               AICn = modelfit(GLM_data)$AICn,
-              BICqh = modelfit(GLM_data)$BICqh))  }
+              BICqh = modelfit(GLM_data)$BICqh))  
 }
 

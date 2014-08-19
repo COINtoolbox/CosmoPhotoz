@@ -29,7 +29,7 @@
 #' \dontrun{
 #' sum("a")
 #' }
-
+#' @export 
 plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins","box")) {
   
   # First some basic error control
