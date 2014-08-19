@@ -1,4 +1,4 @@
-#  R package GRAD file R/TrainGLM.R
+#  R package GRAD file R/glmTrainPhotoZ.R
 #  Copyright (C) 2014  Rafael S. de Souza
 #
 #This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 #' @title Fit a GLM function in the training set  
 #' @param x  data.frame 
 #' @return GLM object 
-#' @import  arm COUNT 
+#' @import  arm COUNT quantreg
 #'@examples
 #'
 #' y <- rgamma(100,10,.1)
@@ -26,13 +26,13 @@
 #
 # A GLM fit for photo-z
 
-glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
+glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), family=c("quantile","gamma","inverse.gaussian")) {
 
   # First some basic error control
   if( ! (method %in% c("Frequentist","Bayesian"))) {
     stop("Error in TrainGLM :: the chosen method is not implemented.")
   } 
-  if( ! (family %in% c("gamma","inverse.gaussian"))) {
+  if( ! (family %in% c("gamma","inverse.gaussian","quantile"))) {
     stop("Error in TrainGLM :: the chosen family is not implemented.")
   } 
   if( ! is.data.frame(x) ) {
@@ -49,6 +49,13 @@ glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), f
       GLM_data <- glm(formula=formula, family=inverse.gaussian(link = "1/mu^2"), data=x)
     
     }
+    
+    if(family=="quantile"){
+
+      GLM_data <- rq(formula=formula, data=x)
+      
+    }
+    
   }
   
   ## Bayesian
@@ -63,8 +70,13 @@ glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), f
 
   # That's it folks!
   # return(summary(GLM_data))
-  return(list(glmfit = GLM_data, Summary = summary(GLM_data),
+  if(family=="quantile"){
+    return(list(glmfit = GLM_data, Summary = summary(GLM_data)
+                )) 
+    
+  }else
+  {return(list(glmfit = GLM_data, Summary = summary(GLM_data),
               AICn = modelfit(GLM_data)$AICn,
-              BICqh = modelfit(GLM_data)$BICqh))  
+              BICqh = modelfit(GLM_data)$BICqh))  }
 }
 

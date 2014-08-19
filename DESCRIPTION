@@ -16,5 +16,6 @@ Imports:
     scales,
     arm,
     rrcovHD,
-    gridExtra
+    gridExtra,
+    quantreg
 NeedsCompilation: no

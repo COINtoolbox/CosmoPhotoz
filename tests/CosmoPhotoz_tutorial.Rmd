@@ -17,7 +17,7 @@ This is an R Markdown document to explain in simple terms the use of Generalized
 # Required libraries
 ```{r,results='hide',message=FALSE, cache=FALSE}
 require(CosmoPhotoz)
-require(quantreg)
+
 ```
 
 Load the data:
@@ -32,6 +32,24 @@ data(PHAT0test)
 Take a look on the data 
 
 
+```{r}
+# Read data set- PHAT0 with noise added ~170,000 objects
+PHAT0<-read.table(file="/Users/rafael/Dropbox/artigos/Meusartigos/IAA-WGC/photo_z/sim1/noise_training_big.dat",header=TRUE)
+# Magnitudes for PCA analysis. 
+colnames(PHAT0)[2]<-"redshift"
+
+PHAT0.mag<-PHAT0[,c("redshift","up","gp","rp","ip","zp","Y","J","H","K","IRAC_1","IRAC_2")]
+
+
+# Define Test and training set with caret 
+
+Partition <- createDataPartition(PHAT0$redshift, p = 0.2,list=FALSE)
+
+
+PHAT0train <- as.data.frame(PHAT0.mag[Partition, ])
+
+PHAT0test <- as.data.frame(PHAT0.mag[-Partition, ])
+```
 
 
 
@@ -63,7 +81,7 @@ Train  the glm model using gamma family
 
 ```{r}
 
-Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
+Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Frequentist",family="gamma")
 
 #glmfit<-rq(redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,data=Trainpc)
 ```
