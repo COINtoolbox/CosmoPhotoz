@@ -1,5 +1,7 @@
 library(shiny)
 library(CosmoPhotoz)
+library(ggplot2)
+library(ggthemes)
 options(shiny.maxRequestSize=100*1024^2) # This is to change the maximum size of the upload to 30 MB
 
 shinyServer(function(input, output) {
