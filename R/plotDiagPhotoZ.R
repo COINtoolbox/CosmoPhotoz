@@ -62,6 +62,11 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     comb <- cbind(specz, photoz)
     colnames(comb) <- c("zspec","zphot")
     comb <- as.data.frame(comb)
+
+    # Just to make sure that very big outliers will not be used for the density estimation
+    pppp <- abs(comb$zphot - comb$zspec)
+    comb <- comb[-which(pppp > abs(median(pppp) + 60*mad(pppp))),]
+
     p1 <- ggplot(comb, aes(x=zspec, y=zphot))
     p2 <- p1 + stat_density2d(bins=200, geom="polygon", aes(fill =..level.., alpha=..level..), na.rm = TRUE, trans="log", n = 250,contour = TRUE) +
       coord_cartesian(xlim=c(0, max(specz)), ylim=c(0, max(specz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
