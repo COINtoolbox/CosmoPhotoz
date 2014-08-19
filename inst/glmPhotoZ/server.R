@@ -30,8 +30,7 @@ shinyServer(function(input, output) {
 
       # Combine the training and test data and calculate the principal components
       PC_comb<-computeCombPCA(subset(PHAT0train, select=c(-redshift)),
-                              subset(PHAT0test,  select=c(-redshift)),
-                              npcvar=0.995)    
+                              subset(PHAT0test,  select=c(-redshift)))    
       Trainpc<-cbind(PC_comb$x, redshift=PHAT0train$redshift)
       Testpc<-PC_comb$y
 

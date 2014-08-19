@@ -64,7 +64,7 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     comb <- as.data.frame(comb)
     p1 <- ggplot(comb,aes(x=zspec,y=zphot))
     p2 <- p1 + stat_density2d(bins=200,geom="polygon",aes(fill =..level..,alpha=..level..),na.rm = TRUE,trans="log",n = 250,contour = TRUE) +
-      coord_cartesian(c(min(specz), max(specz)), c(min(photoz), max(photoz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
+      coord_cartesian(c(min(specz), max(specz)), c(min(photoz), max(specz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
       scale_fill_gradient2(guide="none",low = "#c7e9c0", mid="#41ab5d", high = "#00441b",space = "rgb") +
       geom_abline(intercept = 0)+theme(legend.text = element_text(colour="gray40"), legend.title=element_blank(), text = element_text(size=20),legend.position=c(0.1,0.75),axis.line = element_line(color = 'black')) +
       geom_density2d(colour="gray60", alpha=0.3, breaks = c(1, 5,10,25,50,100,200,250))+theme_gdocs() +
