@@ -1,4 +1,4 @@
-#  R package GRAD file R/CombPCA.R
+#  R package GRAD file R/computeCombPCA.R
 #  Copyright (C) 2014  Rafael S. de Souza
 #
 #This program is free software: you can redistribute it and/or modify
@@ -37,10 +37,10 @@ computeCombPCA <- function(x, y,npcvar) {
 
   # First some basic error control
   if(!is.matrix(x)&!is.data.frame(x)) {
-    stop("Error in CombPCA :: x is nor a matrix neither a data frame. The code expects a matrix or data frame.")
+    stop("Error in computeCombPCA :: x is nor a matrix neither a data frame. The code expects a matrix or data frame.")
   }
   if(!is.matrix(y)&!is.data.frame(y)) {
-    stop("Error in CombPCA :: y is nor a matrix neither a data frame. The code expects a matrix or data frame.")
+    stop("Error in computeCombPCA :: y is nor a matrix neither a data frame. The code expects a matrix or data frame.")
   }
   
   # Now for the real work

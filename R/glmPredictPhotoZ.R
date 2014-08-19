@@ -1,4 +1,4 @@
-#  R package GRAD file R/Predict.redshift.R
+#  R package GRAD file R/glmPredictPhotoZ.R
 #  Copyright (C) 2014  Rafael S. de Souza
 #
 #This program is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ glmPredictPhotoZ <- function(data, train){
 	
  	# First some basic error control
  	if( ! is.data.frame(data) ) {
- 		stop("Error in Predict.redshift :: data is not a data frame, and the code expects a data frame.")
+ 		stop("Error in glmPredictPhotoZ :: data is not a data frame, and the code expects a data frame.")
  	}
  	###### WE NEED TO CHECK IF THE train is a GLM object :: we need to verify if there is a simple way to perform this checking
  	
