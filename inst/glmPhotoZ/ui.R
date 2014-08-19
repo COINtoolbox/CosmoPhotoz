@@ -11,6 +11,8 @@ shinyUI(pageWithSidebar(
 
     h4("Data Input"),
 
+    checkboxInput('dataSourceFlag', 'Used PHAT0 data', FALSE),
+
     fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
 
     fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt')),
