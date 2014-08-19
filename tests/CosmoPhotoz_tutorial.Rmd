@@ -17,11 +17,12 @@ This is an R Markdown document to explain in simple terms the use of Generalized
 # Required libraries
 ```{r,results='hide',message=FALSE, cache=FALSE}
 require(CosmoPhotoz)
+require(quantreg)
 ```
 
 Load the data:
 
-```{r, echo=FALSE}
+```{r}
 data(PHAT0train)
 
 
@@ -34,14 +35,18 @@ Take a look on the data
 
 
 
-```{r, echo=FALSE}
+```{r}
 PC_comb<-computeCombPCA(subset(PHAT0train,select=c(-redshift)),
-                       subset(PHAT0test,select=c(-redshift)))
+                       subset(PHAT0test,select=c(-redshift)),npcvar=0.995)
 ```
 
+Number of PCs to account for 95% of data
+```{r}
+PCvar<-PC_comb$PCvar
+```
 Add the redshift column to the PCA projections of the  Training sample
 
-```{r, echo=FALSE}
+```{r}
 Trainpc<-cbind(PC_comb$x,redshift=PHAT0train$redshift)
 
 ```
@@ -56,16 +61,21 @@ Testpc<-PC_comb$y
 
 Train  the glm model using gamma family
 
-```{r, echo=FALSE}
-glmfit<-glmTrainPhotoZ(Trainpc,method="Bayesian",family="gamma")
+```{r}
+
+Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
+
+#glmfit<-rq(redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,data=Trainpc)
 ```
 
 
 
- Here you predict your photometric redshift from your photometric data
+Here you predict your photometric redshift from your photometric data
  
 ```{r, echo=FALSE}
-photoz<-glmPredictPhotoZ(data = Testpc, train = glmfit$glmfit)$photoz
+#photoz<-glmPredictPhotoZ(data = testpc, train = glmfit$glmfit)$photoz
+photoz<-predict(Fit$glmfit,newdata = Testpc,type="response")
+#photoz<-predict(glmfit,newdata = Testpc,type="response")
 ```
 
 Get the redshifts from the testing sample
@@ -80,3 +90,21 @@ Compute basic diagnostic statistics
 ```{r, echo=FALSE}
 computeDiagPhotoZ(photoz, specz)
 ```
+
+
+
+ Create basic comparison plots
+ 
+```{r,fig.width=8, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "errordist")
+
+```
+
+```{r,fig.width=8, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "predobs")
+```
+
+```{r,fig.width=8, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "box")
+```
+

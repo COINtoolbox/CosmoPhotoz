@@ -26,7 +26,7 @@
 #
 # A GLM fit for photo-z
 
-glmTrainPhotoZ <- function(x, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
+glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
 
   # First some basic error control
   if( ! (method %in% c("Frequentist","Bayesian"))) {
@@ -43,10 +43,10 @@ glmTrainPhotoZ <- function(x, method=c("Frequentist","Bayesian"), family=c("gamm
   ## Frequentist 
   if(method=="Frequentist"){
     if(family=="gamma"){
-      GLM_data <- glm(redshift~., family=Gamma(link = "log"), data=x) 
+      GLM_data <- glm(formula=formula, family=Gamma(link = "log"), data=x) 
     }
     if(family=="inverse.gaussian"){
-      GLM_data <- glm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
+      GLM_data <- glm(formula=formula, family=inverse.gaussian(link = "1/mu^2"), data=x)
     
     }
   }
@@ -54,10 +54,10 @@ glmTrainPhotoZ <- function(x, method=c("Frequentist","Bayesian"), family=c("gamm
   ## Bayesian
   if(method=="Bayesian"){    
     if(family=="gamma"){
-      GLM_data <- bayesglm(redshift~., family=Gamma(link="log"), data=x)
+      GLM_data <- bayesglm(formula=formula, family=Gamma(link="log"), data=x)
     }
     if(family=="inverse.gaussian"){
-      GLM_data <- bayesglm(redshift~., family=inverse.gaussian(link = "1/mu^2"), data=x)
+      GLM_data <- bayesglm(formula=formula, family=inverse.gaussian(link = "1/mu^2"), data=x)
     }
   }
 

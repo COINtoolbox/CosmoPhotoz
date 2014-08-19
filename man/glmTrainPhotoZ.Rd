@@ -3,8 +3,8 @@
 \alias{glmTrainPhotoZ}
 \title{Fit a GLM function in the training set}
 \usage{
-glmTrainPhotoZ(x, method = c("Frequentist", "Bayesian"), family = c("gamma",
-  "inverse.gaussian"))
+glmTrainPhotoZ(x, formula = NULL, method = c("Frequentist", "Bayesian"),
+  family = c("gamma", "inverse.gaussian"))
 }
 \arguments{
 \item{x}{data.frame}
