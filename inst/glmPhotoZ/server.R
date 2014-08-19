@@ -31,21 +31,22 @@ shinyServer(function(input, output) {
       }
 
       # Combine the training and test data and calculate the principal components
-      PC_comb<-computeCombPCA(subset(PHAT0train, select=c(-redshift)),
+      PC_comb <- computeCombPCA(subset(PHAT0train, select=c(-redshift)),
                               subset(PHAT0test,  select=c(-redshift)))    
-      Trainpc<-cbind(PC_comb$x, redshift=PHAT0train$redshift)
-      Testpc<-PC_comb$y
+      Trainpc <- cbind(PC_comb$x, redshift=PHAT0train$redshift)
+      Testpc <- PC_comb$y
 
       # Dynamic generation of the formula based on the user selected number of PCs
       formM <- paste(names(PC_comb$x[1:6]), collapse="*") ## THE NUMBER OF PCS USED ENTER HERE
       formM <- paste("redshift~",formM, sep="")
       
       # Fitting
-      Fit<-glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), method=input$method, family=input$family)
+      Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), method=input$method, family=input$family)
+#      Fit<-glmTrainPhotoZ(Trainpc, formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6, method=input$method, family=input$family)
       
       # Photo-z estimation
-      photoz<-predict(Fit$glmfit, newdata=Testpc, type="response")
-      specz<-PHAT0test$redshift
+      photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
+      specz <- PHAT0test$redshift
 
     # Time to return the data!
     return(data.frame(photoz, specz))
@@ -53,35 +54,35 @@ shinyServer(function(input, output) {
 
   # Create the output text
   output$diagnostics <- renderPrint({
-    temp <- shinyCompPhotoZ()
-    if(!is.null(temp)) {
-      computeDiagPhotoZ(temp$photoz, temp$specz)
+    tempObj <- shinyCompPhotoZ()
+    if(!is.null(tempObj)) {
+      computeDiagPhotoZ(tempObj$photoz, tempObj$specz)
     }
   })
 
   # Create basic comparison plots
   output$errorDistPlot <- renderPlot({
-    temp <- shinyCompPhotoZ()
-    if(!is.null(temp)) {
-      plotDiagPhotoZ(temp$photoz, temp$specz, type = "errordist")
+    tempObj <- shinyCompPhotoZ()
+    if(!is.null(tempObj)) {
+      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "errordist")
     }
   })
   output$predictObs <- renderPlot({
-    temp <- shinyCompPhotoZ()
-    if(!is.null(temp)) {
-      plotDiagPhotoZ(temp$photoz, temp$specz, type = "predobs")
+    tempObj <- shinyCompPhotoZ()
+    if(!is.null(tempObj)) {
+      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "predobs")
     }
   })
   output$violins <- renderPlot({
-    temp <- shinyCompPhotoZ()
-    if(!is.null(temp)) {
-      plotDiagPhotoZ(temp$photoz, temp$specz, type = "errorviolins")
+    tempObj <- shinyCompPhotoZ()
+    if(!is.null(tempObj)) {
+      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "errorviolins")
     }
   })
   output$box <- renderPlot({
-    temp <- shinyCompPhotoZ()
-    if(!is.null(temp)) {
-      plotDiagPhotoZ(temp$photoz, temp$specz, type = "box")
+    tempObj <- shinyCompPhotoZ()
+    if(!is.null(tempObj)) {
+      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "box")
     }
   })
 
