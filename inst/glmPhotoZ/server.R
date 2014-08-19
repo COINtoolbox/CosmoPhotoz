@@ -31,11 +31,11 @@ shinyServer(function(input, output) {
 
     # Principal componentes for training data
     trainpc<-cbind(PC_comb$x, Mega.train$redshift)
-    colnames(trainpc)<-c("PC1","PC2","PC3","PC4","redshift")
+    colnames(trainpc)<-c("PC1", "PC2", "PC3", "PC4", "redshift")
 
     # Principal components for test data
     testpc<-PC_comb$y
-    colnames(testpc)<-c("PC1","PC2","PC3","PC4")
+    colnames(testpc)<-c("PC1", "PC2", "PC3", "PC4")
 
     # Here you train compute the glm model to predict photometric redshifts
     glmfit <- glmTrainPhotoZ(trainpc, method=input$method, family=input$family)
