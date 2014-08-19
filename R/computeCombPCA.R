@@ -33,7 +33,7 @@
 #
 # A list of PCA projections for each matrix
 
-computeCombPCA <- function(x, y, npcvar=4) {
+computeCombPCA <- function(x, y) {
 
   # First some basic error control
   if(!is.matrix(x)&!is.data.frame(x)) {
@@ -48,9 +48,9 @@ computeCombPCA <- function(x, y, npcvar=4) {
   XYPCA <- PCAgrid(XY, k=ncol(XY)-1,scale="mad",method="mad")  # Calculate the robust PCA
   X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])             # get the scores in a data frame
   Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),])  # get the scores in a data frame
-  PCvar <- which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2) >= npcvar)[1]
+ # PCvar <- which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2) >= npcvar)[1]
   
   # That's all folks!
-  return(list(x=X.PCA, y=Y.PCA, PCvar=PCvar))
+  return(list(x=X.PCA, y=Y.PCA, PCsum=summary(XYPCA)))
 }
 

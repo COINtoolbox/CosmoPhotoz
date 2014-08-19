@@ -3,7 +3,7 @@
 \alias{computeCombPCA}
 \title{Combined PCA for training and test sample}
 \usage{
-computeCombPCA(x, y, npcvar = 4)
+computeCombPCA(x, y)
 }
 \arguments{
 \item{x}{matrix or data.frame}

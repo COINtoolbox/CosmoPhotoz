@@ -47,7 +47,7 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
   # If the user wants to plot the error distributions
   if(type=="errordist") {
     sig <- data.frame(sigma=(photoz-specz)/(1+specz))
-    g1 <- ggplot(sig,x=sigma) + geom_density(aes(x=sigma),fill="blue2", alpha=0.4) + coord_cartesian(c(-1, 1)) +
+    g1 <- ggplot(sig,x=sigma) + geom_density(aes(x=sigma),fill="#31a354", alpha=0.6) + coord_cartesian(c(-1, 1)) +
       xlab(expression((z[phot]-z[spec])/(1+z[spec]))) +
       theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
       theme(plot.title = element_text(hjust=0.5),
@@ -65,7 +65,7 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     p1 <- ggplot(comb,aes(x=zspec,y=zphot))
     p2 <- p1 + stat_density2d(bins=200,geom="polygon",aes(fill =..level..,alpha=..level..),na.rm = TRUE,trans="log",n = 250,contour = TRUE) +
       coord_cartesian(c(min(specz), max(specz)), c(min(photoz), max(photoz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
-      scale_fill_gradient2(guide="none",low = "blue", mid="cyan", high = "orange2",space = "rgb") +
+      scale_fill_gradient2(guide="none",low = "#c7e9c0", mid="#41ab5d", high = "#00441b",space = "rgb") +
       geom_abline(intercept = 0)+theme(legend.text = element_text(colour="gray40"), legend.title=element_blank(), text = element_text(size=20),legend.position=c(0.1,0.75),axis.line = element_line(color = 'black')) +
       geom_density2d(colour="gray60", alpha=0.3, breaks = c(1, 5,10,25,50,100,200,250))+theme_gdocs() +
       scale_alpha(guide="none")
@@ -81,7 +81,7 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
     p <- ggplot(dfd) + xlab(expression(z[spec])) + ylab(expression((z[photo]-z[spec])/(1+z[spec]))) + ylim(-0.5, 0.5)
     p <- p + theme(legend.position = "none", axis.title.x = element_text(size=15), axis.title.y = element_text(size=15))
-    p <- p + geom_violin(aes(z_spec, z_photo), fill=rgb(140/255,150/255,198/255), alpha=0.8)+
+    p <- p + geom_violin(aes(z_spec, z_photo), fill="#31a354", alpha=0.8)+
       theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
       theme(plot.title = element_text(hjust=0.5),
             axis.title.y=element_text(vjust=0.75),
@@ -103,7 +103,7 @@ if(type=="box") {
   dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
   p <- ggplot(dfd) + xlab(expression(z[spec])) + ylab(expression((z[photo]-z[spec])/(1+z[spec]))) + ylim(-0.5, 0.5)
   p <- p + theme(legend.position = "none", axis.title.x = element_text(size=15), axis.title.y = element_text(size=15))
-  p <- p + geom_boxplot(aes(z_spec, z_photo), notch=F,fill="blue", alpha=0.8)+
+  p <- p + geom_boxplot(aes(z_spec, z_photo), notch=F,fill="#31a354", alpha=0.8)+
     theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
     theme(plot.title = element_text(hjust=0.5),
           axis.title.y=element_text(vjust=0.75),
