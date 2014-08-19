@@ -55,12 +55,12 @@ PHAT0test <- as.data.frame(PHAT0.mag[-Partition, ])
 
 ```{r}
 PC_comb<-computeCombPCA(subset(PHAT0train,select=c(-redshift)),
-                       subset(PHAT0test,select=c(-redshift)),npcvar=0.95)
+                       subset(PHAT0test,select=c(-redshift)))
 ```
 
 Number of PCs to account for 95% of data
 ```{r}
-PCvar<-PC_comb$PCvar
+PCvar<-PC_comb$PCsum
 ```
 Add the redshift column to the PCA projections of the  Training sample
 
@@ -81,7 +81,7 @@ Train  the glm model using gamma family
 
 ```{r}
 
-Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~poly(Comp.1,2)*poly(Comp.2,2)*Comp.3*Comp.4,method="Bayesian",family="gamma")
+Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~poly(Comp.1,2)*poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
 
 #Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~Comp.1*Comp.2*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
 
@@ -125,6 +125,6 @@ plotDiagPhotoZ(photoz, specz, type = "predobs")
 ```
 
 ```{r,fig.width=8, fig.height=9}
-plotDiagPhotoZ(photoz, specz, type = "box")
+plotDiagPhotoZ(photoz, specz, type = "errorviolins")
 ```
 

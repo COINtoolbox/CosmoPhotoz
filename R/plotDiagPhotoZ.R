@@ -103,7 +103,7 @@ if(type=="box") {
   dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
   p <- ggplot(dfd) + xlab(expression(z[spec])) + ylab(expression((z[photo]-z[spec])/(1+z[spec]))) + ylim(-0.5, 0.5)
   p <- p + theme(legend.position = "none", axis.title.x = element_text(size=15), axis.title.y = element_text(size=15))
-  p <- p + geom_boxplot(aes(z_spec, z_photo), notch=F,fill="#31a354", alpha=0.8)+
+  p <- p + geom_boxplot(aes(z_spec, z_photo), notch=F,fill="#31a354", alpha=0.8,outlier.colour = "gray")+
     theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
     theme(plot.title = element_text(hjust=0.5),
           axis.title.y=element_text(vjust=0.75),
