@@ -46,7 +46,11 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
   # Now, for the real work
   # If the user wants to plot the error distributions
   if(type=="errordist") {
-    sig <- data.frame(sigma=(photoz-specz)/(1+specz))
+    sigm <- (photoz-specz)/(1+specz)
+    # Just to make sure that very big outliers will not be used for the density estimation
+    sigm <- sigm[-which(sigm > abs(median(sigm) + 60*mad(sigm)))]
+    sig <- data.frame(sigma=sigm)
+
     g1 <- ggplot(sig,x=sigma) + geom_density(aes(x=sigma),fill="#31a354", alpha=0.6) + coord_cartesian(c(-1, 1)) +
       xlab(expression((z[phot]-z[spec])/(1+z[spec]))) +
       theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
@@ -62,7 +66,6 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     comb <- cbind(specz, photoz)
     colnames(comb) <- c("zspec","zphot")
     comb <- as.data.frame(comb)
-
     # Just to make sure that very big outliers will not be used for the density estimation
     pppp <- abs(comb$zphot - comb$zspec)
     comb <- comb[-which(pppp > abs(median(pppp) + 60*mad(pppp))),]
