@@ -34,9 +34,9 @@
 #' 
 #' # Then generate the plots
 #' plotDiagPhotoZ(ppo_ph, ppo, type="errordist")
-#' plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
-#' plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
-#' plotDiagPhotoZ(ppo_ph, ppo, type="box")
+#' #plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
+#' #plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
+#' #plotDiagPhotoZ(ppo_ph, ppo, type="box")
 #' 
 #' @usage plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"))
 #' 
@@ -56,6 +56,9 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
   if( ! is.vector(specz) ) {
     stop("Error in plotDiagPhotoZ :: specz is not a vector, and the code expects a vector.")
   }
+  
+  # To prevent CRAN check notes regarding no visible bindings
+  sigma=zspec=zphot=z_spec=z_photo=..level..=NULL
 
   # Now, for the real work
   # If the user wants to plot the error distributions
@@ -87,14 +90,14 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     pppp <- abs(comb$zphot - comb$zspec)
     comb <- comb[-which(pppp > abs(median(pppp) + 60*mad(pppp))),]
     # if the rejection was too strong, get back...
-    if (length(comb$zspec)/length(ppp) < 0.95) {
+    if (length(comb$zspec)/length(pppp) < 0.95) {
       comb <- data.frame(zspec=specz, zphot=photoz)
     }
     
     p1 <- ggplot(comb, aes(x=zspec, y=zphot))
     p2 <- p1 + stat_density2d(bins=200, geom="polygon", aes(fill =..level.., alpha=..level..), na.rm = TRUE, trans="log", n = 250,contour = TRUE) +
+#      p2 <- p1 + stat_density2d(bins=200, geom="polygon", aes(), na.rm = TRUE, trans="log", n = 250,contour = TRUE) +
       coord_cartesian(xlim=c(0, max(specz)), ylim=c(0, max(specz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
-#      coord_cartesian(xlim=c(0, 2), ylim=c(0, 2)) + xlab(expression(z[spec]))+ylab(expression(z[phot])) +
       scale_fill_gradient2(guide="none", low = "#c7e9c0", mid="#41ab5d", high = "#00441b",space = "rgb") +
       geom_abline(intercept = 0) + theme(legend.text = element_text(colour="gray40"), legend.title=element_blank(), text = element_text(size=20), legend.position=c(0.1,0.75), axis.line = element_line(color = 'black')) +
       geom_density2d(colour="gray60", alpha=0.3, breaks = c(1, 5,10,25,50,100,200,250)) + theme_gdocs() +

@@ -14,9 +14,10 @@ Imports:
     ggthemes,
     arm,
     COUNT,
-    scales,
     rrcovHD,
     gridExtra,
     quantreg,
-    pcaPP
+    pcaPP,
+    mvtnorm,
+    shiny
 NeedsCompilation: no

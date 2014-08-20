@@ -36,5 +36,13 @@ Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 	\code{\link{bayesglm}}
 }
 \examples{
-~~ simple examples of the most important functions ~~
+\dontrun{
+# Load the data
+data(PHAT0train)
+data(PHAT0test)
+# Run the analysis
+photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6)
+# Create a boxplot showing the results
+plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
+}
 }

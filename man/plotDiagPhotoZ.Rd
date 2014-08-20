@@ -30,9 +30,9 @@ ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
 
 # Then generate the plots
 plotDiagPhotoZ(ppo_ph, ppo, type="errordist")
-plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
-plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
-plotDiagPhotoZ(ppo_ph, ppo, type="box")
+#plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
+#plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
+#plotDiagPhotoZ(ppo_ph, ppo, type="box")
 }
 \author{
 Rafael S. de Souza, Alberto Krone-Martins

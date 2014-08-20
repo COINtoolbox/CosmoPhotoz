@@ -3,7 +3,7 @@
 \alias{glmTrainPhotoZ}
 \title{Fit a GLM for photometric redshift estimation}
 \usage{
-glmTrainPhotoZ(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian"))
+glmTrainPhotoZ(x, formula, method, family)
 }
 \arguments{
 \item{x}{a data.frame containing the data to train the model}
@@ -27,13 +27,14 @@ photometric redshift estimation.
 packagePath <- paste(find.package("CosmoPhotoz"),"/extdata/",sep="")
 trainData <- read.table(file=paste(packagePath, "sdss-ugriz-train.dat", sep=""), header=FALSE)
 testData <-  read.table(file=paste(packagePath, "sdss-ugriz-test.dat", sep=""), header=FALSE)
-trainData <- trainData[,c(1:5,11)] # Select the relevant data (photometry and spectroscopic redshift)
-testData <- testData[,c(1:5,11)]   # Select the relevant data (photometry and spectroscopic redshift)
+trainData <- trainData[,c(1:5,11)] # Select the relevant data (phot and spec redshift)
+testData <- testData[,c(1:5,11)]   # Select the relevant data (phot and spec redshift)
 colnames(trainData) <- c("u", "g", "r", "i", "z", "redshift")
 colnames(testData) <- c("u", "g", "r", "i", "z", "redshift")
 
 # Combine the training and test data and calculate the principal components
-PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)), subset(testData,  select=c(-redshift)))
+PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)),
+           subset(testData, select=c(-redshift)))
 Trainpc <- cbind(PC_comb$x, redshift=testData$redshift)
 Testpc <- PC_comb$y
 

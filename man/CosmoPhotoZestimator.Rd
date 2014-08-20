@@ -12,7 +12,7 @@ CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family)
 
 \item{numberOfPcs}{an integer indicating the number of principal components to consider}
 
-\item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{glm} from the package \code{stats}; \code{Bayesian} will use the function \code{bayesglm} from the package \code{arm}.}
+\item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}.}
 
 \item{family}{a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).}
 }
@@ -20,9 +20,9 @@ CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family)
 a vector with the estimated photometric redshifts
 }
 \description{
-\code{CosmoPhotoz} returns photometric redshift estimated from photometric
+\code{CosmoPhotoZestimator} returns photometric redshift estimated from photometric
 data and a training dataset with photometry and spectroscopy. The estimation is
-based on GLMs (see \link{\code{glmTrainPhotoz}} and \link{\code{glmPredictPhotoz}}).
+based on GLMs (see \code{\link{glmTrainPhotoZ}} and \code{\link{glmPredictPhotoZ}}).
 }
 \examples{
 \dontrun{
@@ -33,7 +33,7 @@ data(PHAT0test)
 # Run the analysis
 photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6)
 
-# Create a boxplot
+# Create a boxplot showing the results
 plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
 }
 }

@@ -14,16 +14,12 @@ glmPredictPhotoZ(data, train)
 list containing the results of the redshift estimation
 }
 \description{
-\code{computeDiagPhotoZ} computes a list of simple summary
+\code{glmPredictPhotoZ} computes a list of simple summary
 statistics for the photometric redshift estimation.
 }
 \examples{
 \dontrun{
 # First, generate some mock data
-ppo <- runif(1000, min=0.1, max=2)
-ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
-
-# Now, mock a redshift training and estimation
 }
 }
 \author{

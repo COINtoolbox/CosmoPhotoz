@@ -15,14 +15,15 @@
 
 #' @title Photo-z estimation from a training dataset and a test dataset
 #'
-#' @description \code{CosmoPhotoz} returns photometric redshift estimated from photometric 
+#' @description \code{CosmoPhotoZestimator} returns photometric redshift estimated from photometric 
 #' data and a training dataset with photometry and spectroscopy. The estimation is 
-#' based on GLMs (see \link{\code{glmTrainPhotoz}} and \link{\code{glmPredictPhotoz}}).
+#' based on GLMs (see \code{\link{glmTrainPhotoZ}} and \code{\link{glmPredictPhotoZ}}).
 #' 
+#' @import shiny
 #' @param trainData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).
 #' @param testData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).
 #' @param numberOfPcs an integer indicating the number of principal components to consider
-#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{glm} from the package \code{stats}; \code{Bayesian} will use the function \code{bayesglm} from the package \code{arm}.
+#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}.
 #' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
 #' @return a vector with the estimated photometric redshifts
 #' @examples
@@ -34,7 +35,7 @@
 #' # Run the analysis
 #' photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6)
 #' 
-#' # Create a boxplot
+#' # Create a boxplot showing the results
 #' plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
 #' }
 #' 
@@ -46,17 +47,20 @@
 #' @export
 CosmoPhotoZestimator <- function(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma") {
   # Combine the training and test data and calculate the principal components
+  redshift <- NULL # <- this is just to prevent a NOTE from CRAN checks
   PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)),
-                          subset(testData,  select=c(-redshift)))
+                            subset(testData,  select=c(-redshift)))
   Trainpc <- cbind(PC_comb$x, redshift=trainData$redshift)
   Testpc <- PC_comb$y
 
   # Dynamic generation of the formula based on the user selected number of PCs
-  formM <- paste(names(PC_comb$x[1:numberOfPcs]), collapse="*")
-  formM <- paste("redshift~",formM, sep="")
+  formMa <- "poly(Comp.1,2)*poly(Comp.2,2)*"
+  formMb <- paste(names(PC_comb$x[3:numberOfPcs]), collapse="*")
+  formM <- paste("redshift~",formMa, formMb, sep="")
 
   # Fitting
-  Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), method=method, family=family)
+  Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), 
+                        method=method, family=family)
 
   # Photo-z estimation
   photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")

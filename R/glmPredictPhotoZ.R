@@ -16,7 +16,7 @@
 
 #' @title Predict photometric redshifts using a given a GLM fit object
 #'
-#' @description \code{computeDiagPhotoZ} computes a list of simple summary 
+#' @description \code{glmPredictPhotoZ} computes a list of simple summary 
 #' statistics for the photometric redshift estimation.
 #' 
 #' @param data a data.frame containing the data one wished to compute the redshift
@@ -25,10 +25,6 @@
 #' @examples
 #' \dontrun{
 #' # First, generate some mock data
-#' ppo <- runif(1000, min=0.1, max=2)
-#' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
-#'  
-#' # Now, mock a redshift training and estimation
 #' }
 #
 #' @usage glmPredictPhotoZ(data, train)

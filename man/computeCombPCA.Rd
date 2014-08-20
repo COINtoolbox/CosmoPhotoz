@@ -19,13 +19,13 @@ the training and test samples.
 }
 \examples{
 #Multivariate data with outliers
-#library(mvtnorm)
+library(mvtnorm)
 x <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
 y <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
-#Here we calculate the principal components with PCAgrid
-pc <- PCAgrid(x)
+#Here we calculate the principal components
+pc <- computeCombPCA(x, y)
 }
 \author{
 Rafael S. de Souza, Alberto Krone-Martins

@@ -19,21 +19,21 @@
 #' @description \code{computeCombPCA} computes combined PCA projections of 
 #' the training and test samples.
 #' 
-#' @import pcaPP
+#' @import pcaPP mvtnorm
 #' @param x a matrix or a data.frame 
 #' @param y a matrix or a data.frame 
 #' @return PCA projections for each matrix 
 #' @examples
 #' 
 #' #Multivariate data with outliers
-#' #library(mvtnorm)
+#' library(mvtnorm)
 #' x <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
 #'           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
 #' y <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
 #'           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))         
-#' #Here we calculate the principal components with PCAgrid
-#' pc <- PCAgrid(x) 
-
+#' #Here we calculate the principal components
+#' pc <- computeCombPCA(x, y)
+#'  
 #' @usage computeCombPCA(x, y)
 #' 
 #' @author Rafael S. de Souza, Alberto Krone-Martins
