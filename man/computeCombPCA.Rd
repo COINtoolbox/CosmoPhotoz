@@ -6,23 +6,29 @@
 computeCombPCA(x, y)
 }
 \arguments{
-\item{x}{matrix or data.frame}
+\item{x}{a matrix or a data.frame}
 
-\item{y}{matrix or data.frame}
+\item{y}{a matrix or a data.frame}
 }
 \value{
 PCA projections for each matrix
 }
 \description{
-Combined PCA for training and test sample
+\code{computeCombPCA} computes combined PCA projections of
+the training and test samples.
 }
 \examples{
-Multivariate data with outliers
-library(mvtnorm)
+#Multivariate data with outliers
+#library(mvtnorm)
 x <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
 y <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
+#Here we calculate the principal components with PCAgrid
 pc <- PCAgrid(x)
 }
+\author{
+Rafael S. de Souza, Alberto Krone-Martins
+}
+\keyword{misc}
 

@@ -1,5 +1,5 @@
 #  R package GRAD file R/computeDiagPhotoZ.R
-#  Copyright (C) 2014  Rafael S. de Souza
+#  Copyright (C) 2014  COIN
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License version 3 as published by
@@ -13,19 +13,28 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 #
-#' @title Diagnostic for  photometric redshift fit
-#' @param  photoz vector
-#' @param specz  vector
-#' @return list 
-#'@examples
-#'
-#' y <- rgamma(100,10,.1)
-#' summary(glm(y~1,family=Gamma))
-#'  
-#' @export 
-#
-# A list of summary statistics for  photo-z estimation
 
+#' @title Simple diagnostics for the photometric redshift results
+#'
+#' @description \code{computeDiagPhotoZ} computes a list of simple summary 
+#' statistics for the photometric redshift estimation.
+#' 
+#' @param photoz vector
+#' @param specz  vector
+#' @return a list containing the summary statistics
+#' @examples
+#' # First, generate some mock data
+#' ppo <- runif(1000, min=0.1, max=2)
+#' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
+#' 
+#' # Now, compute the summary stats
+#' computeDiagPhotoZ(ppo_ph, ppo)
+#
+#' @usage computeDiagPhotoZ(photoz, specz)
+#' 
+#' @author Rafael S. de Souza, Alberto Krone-Martins
+#' 
+#' @keywords misc
 computeDiagPhotoZ <- function(photoz, specz){
 
   # First some basic error control

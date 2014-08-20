@@ -1,5 +1,5 @@
 #  R package GRAD file R/computeCombPCA.R
-#  Copyright (C) 2014  Rafael S. de Souza
+#  Copyright (C) 2014  COIN
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License version 3 as published by
@@ -13,26 +13,32 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 #
-#' @title Combined PCA for training and test sample 
-#' @param x matrix or data.frame 
-#' @param y matrix or data.frame 
-#' @return PCA projections for each matrix 
-#' @import  pcaPP
-#'@examples
+
+#' @title Combined PCA for training and test sample
 #'
-#' Multivariate data with outliers
-#' library(mvtnorm)
+#' @description \code{computeCombPCA} computes combined PCA projections of 
+#' the training and test samples.
+#' 
+#' @import pcaPP
+#' @param x a matrix or a data.frame 
+#' @param y a matrix or a data.frame 
+#' @return PCA projections for each matrix 
+#' @examples
+#' 
+#' #Multivariate data with outliers
+#' #library(mvtnorm)
 #' x <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
 #'           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
 #' y <- rbind(rmvnorm(100, rep(0, 6), diag(c(5, rep(1,5)))),
 #'           rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))         
-# Here we calculate the principal components with PCAgrid
-#'pc <- PCAgrid(x) 
-#'  
-#' @export 
-#
-# A list of PCA projections for each matrix
+#' #Here we calculate the principal components with PCAgrid
+#' pc <- PCAgrid(x) 
 
+#' @usage computeCombPCA(x, y)
+#' 
+#' @author Rafael S. de Souza, Alberto Krone-Martins
+#' 
+#' @keywords misc
 computeCombPCA <- function(x, y) {
 
   # First some basic error control
@@ -44,10 +50,10 @@ computeCombPCA <- function(x, y) {
   }
   
   # Now for the real work
-  XY <- rbind(x, y)                                            # Create the combined matrix 
-  XYPCA <- PCAgrid(XY, k=ncol(XY)-1,scale="mad",method="mad")  # Calculate the robust PCA
-  X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])             # get the scores in a data frame
-  Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),])  # get the scores in a data frame
+  XY <- rbind(x, y)                                              # Create the combined matrix 
+  XYPCA <- PCAgrid(XY, k=ncol(XY)-1, scale="mad", method="mad")  # Calculate the robust PCA
+  X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])               # get the scores in a data frame
+  Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),])    # get the scores in a data frame
  # PCvar <- which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2) >= npcvar)[1]
   
   # That's all folks!

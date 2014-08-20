@@ -10,7 +10,7 @@ plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "bo
 
 \item{specz}{vector containing spectroscopic redshift data}
 
-\item{type}{a string with one of the following values: "errordist", "predobs", "errorviolins" or "box".}
+\item{type}{a string with one of the following values: (\code{errordist}), (\code{predobs}), (\code{errorviolins}) or (\code{box}).}
 }
 \value{
 ggplot object
@@ -18,9 +18,10 @@ ggplot object
 \description{
 \code{plotDiagPhotoZ} returns diagnostic plots from the results of
 photometric redshifts. Different types of plots are available: a density plot of the
-error distribution, a predicted versus observed contour plot, violin plot showing
-the error distribution at different redshift bins and a box plot showing the errors
-at each different redshift bin. The produced plots are returned as ggplot2 objects.
+error distribution (\code{errordist}), a predicted versus observed contour plot
+(\code{predobs}), violin plot showing the error distribution at different redshift
+bins (\code{errorviolins}) and a box plot showing the errors at each different
+redshift bin (\code{box}). The produced plots are returned as ggplot2 objects.
 }
 \examples{
 \dontrun{

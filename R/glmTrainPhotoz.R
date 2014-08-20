@@ -13,20 +13,32 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 #
-#' @title Fit a GLM function in the training set  
-#' @param x  data.frame 
-#' @return GLM object 
-#' @import  arm COUNT quantreg
-#'@examples
-#'
-#' y <- rgamma(100,10,.1)
-#' summary(glm(y~1,family=Gamma))
-#'  
-#' @export 
-#
-# A GLM fit for photo-z
 
-glmTrainPhotoZ <- function(x,formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
+#' @title Fit a GLM for photometric redshift estimation
+#'
+#' @description \code{glmTrainPhotoZ} trains a generalized linear model for 
+#' photometric redshift estimation.
+#' 
+#' @param x a data.frame containing the data to train the model
+#' @param formula an object of class "formula" to be adopted
+#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{\link{mixlm}}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{\link{arm}}.
+#' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
+#' @return GLM object a trainned GLM object containing the fit of the model
+#' @examples
+#' \dontrun{
+#' # First, generate some mock data
+#' ppo <- runif(1000, min=0.1, max=2)
+#' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
+#'  
+#' # Now, mock a redshift training and estimation
+#' }
+#
+#' @usage glmTrainPhotoZ(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian"))
+#' 
+#' @author Rafael S. de Souza, Alberto Krone-Martins
+#' 
+#' @keywords utilities
+glmTrainPhotoZ <- function(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
 
   # First some basic error control
   if( ! (method %in% c("Frequentist","Bayesian"))) {

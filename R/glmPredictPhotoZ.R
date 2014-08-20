@@ -13,19 +13,29 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 #
-#' @title Predict photometric redshift from a GLM fit 
-#' @param  x data.frame
-#' @param train  GLM object 
-#' @return list 
-#'@examples
-#'
-#' y <- rgamma(100,10,.1)
-#' summary(glm(y~1,family=Gamma))
-#'  
-#' @export 
-#
-# A GLM fit for photo-z
 
+#' @title Predict photometric redshifts using a given a GLM fit object
+#'
+#' @description \code{computeDiagPhotoZ} computes a list of simple summary 
+#' statistics for the photometric redshift estimation.
+#' 
+#' @param data a data.frame containing the data one wished to compute the redshift
+#' @param train a trainned GLM object containing the fit of the model
+#' @return list containing the results of the redshift estimation
+#' @examples
+#' \dontrun{
+#' # First, generate some mock data
+#' ppo <- runif(1000, min=0.1, max=2)
+#' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
+#'  
+#' # Now, mock a redshift training and estimation
+#' }
+#
+#' @usage glmPredictPhotoZ(data, train)
+#' 
+#' @author Rafael S. de Souza, Alberto Krone-Martins
+#' 
+#' @keywords utilities
 glmPredictPhotoZ <- function(data, train){
 	
  	# First some basic error control
