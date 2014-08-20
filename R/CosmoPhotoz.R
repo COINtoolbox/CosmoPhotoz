@@ -24,9 +24,19 @@
 #' @param numberOfPcs an integer indicating the number of principal components to consider
 #' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.
 #' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
-#' @return a vector with the estimated photometric redshifts 
+#' @return a vector with the estimated photometric redshifts
 #' @examples
-#' # First, generate some mock data
+#' \dontrun{
+#' # Load the data
+#' data(PHAT0train)
+#' data(PHAT0test)
+#' 
+#' # Run the analysis
+#' photoZest <- CosmoPhotoz(PHAT0train, PHAT0test, 6)
+#' 
+#' # Create a boxplot
+#' plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
+#' }
 #' 
 #' @usage CosmoPhotoz(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma")
 #' 
@@ -50,7 +60,6 @@ CosmoPhotoz <- function(trainData, testData, numberOfPcs=4, method="Bayesian", f
 
   # Photo-z estimation
   photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
-  # specz <- testData$redshift
   
   return(photoz)
 }

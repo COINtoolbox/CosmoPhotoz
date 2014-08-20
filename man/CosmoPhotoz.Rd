@@ -25,7 +25,17 @@ data and a training dataset with photometry and spectroscopy. The estimation is
 based on GLMs (see \link{\code{glmTrainPhotoz}} and \link{\code{glmPredictPhotoz}}).
 }
 \examples{
-# First, generate some mock data
+\dontrun{
+# Load the data
+data(PHAT0train)
+data(PHAT0test)
+
+# Run the analysis
+photoZest <- CosmoPhotoz(PHAT0train, PHAT0test, 6)
+
+# Create a boxplot
+plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
+}
 }
 \author{
 Alberto Krone-Martins, Rafael S. de Souza
