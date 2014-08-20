@@ -1,5 +1,5 @@
 #  R package GRAD file R/glmPredictPhotoZ.R
-#  Copyright (C) 2014  Rafael S. de Souza
+#  Copyright (C) 2014  COIN
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License version 3 as published by

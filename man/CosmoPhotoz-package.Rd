@@ -3,24 +3,27 @@
 \alias{CosmoPhotoz}
 \docType{package}
 \title{
-Photometric redshift estimation based on  Generalized Linear Models
+Photometric redshift estimation based on Generalized Linear Models
 }
 \description{
-This package provides a user-friendly interface to perform fast and reliable  photometric redshift estimation. The code make use generalized linear models from a Gamma family, both from a frequentist and a bayesian perspective. 
+This package provides user-friendly interfaces to perform fast and reliable photometric 
+redshift estimation. The code make use generalized linear models and can adopt Gamma or 
+Inverse Gaussian families, either from a frequentist or a bayesian perspective. The code
+additionally provides a Shiny application.
 }
 \details{
 \tabular{ll}{
 Package: \tab CosmoPhotoz\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-08-15\cr
-License: \tab What license is it under?\cr
+Version: \tab 0.1\cr
+Date: \tab 2014-08-20\cr
+License: \tab GPL (>= 3)\cr
 }
 ~~ An overview of how to use the package, including the most important ~~
 ~~ functions ~~
 }
 \author{
-Rafael S. de Souza
+Rafael S. de Souza, Alberto Krone-Martins
 
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 }
@@ -31,8 +34,8 @@ Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 ~~ the R documentation directory ~~
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+	\code{\link[<stats>:<stats>-glm]{<stats>}}
+	\code{\link[<arm>:<arm>-bayesglm]{<arm>}}
 }
 \examples{
 ~~ simple examples of the most important functions ~~

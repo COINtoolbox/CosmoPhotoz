@@ -1,5 +1,5 @@
 #  R package GRAD file R/glmTrainPhotoZ.R
-#  Copyright (C) 2014  Rafael S. de Souza
+#  Copyright (C) 2014  COIN
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License version 3 as published by
@@ -26,11 +26,31 @@
 #' @return a trainned GLM object containing the fit of the model
 #' @examples
 #' \dontrun{
-#' # First, generate some mock data
-#' ppo <- runif(1000, min=0.1, max=2)
-#' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
-#'  
-#' # Now, mock a redshift training and estimation
+#' # First, load the test and train data
+#' packagePath <- paste(find.package("CosmoPhotoz"),"/extdata/",sep="")
+#' trainData <- read.table(file=paste(packagePath, "sdss-ugriz-train.dat", sep=""), header=FALSE)
+#' testData <-  read.table(file=paste(packagePath, "sdss-ugriz-test.dat", sep=""), header=FALSE)
+#' trainData <- trainData[,c(1:5,11)] # Select the relevant data (photometry and spectroscopic redshift)
+#' testData <- testData[,c(1:5,11)]   # Select the relevant data (photometry and spectroscopic redshift)
+#' colnames(trainData) <- c("u", "g", "r", "i", "z", "redshift")
+#' colnames(testData) <- c("u", "g", "r", "i", "z", "redshift")
+#' 
+#' # Combine the training and test data and calculate the principal components
+#' PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)), subset(testData,  select=c(-redshift)))    
+#' Trainpc <- cbind(PC_comb$x, redshift=testData$redshift)
+#' Testpc <- PC_comb$y
+#' 
+#' # Dynamic generation of the formula based on the user selected number of PCs
+#' nPcs <- 4 ## THE NUMBER OF PCS USED ENTER HERE
+#' formM <- paste(names(PC_comb$x[1:nPcs]), collapse="*") 
+#' formM <- paste("redshift~",formM, sep="")
+#' 
+#' # Fitting
+#' Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), method="Bayesian" , family="gamma")
+#' 
+#' # Photo-z estimation
+#' photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
+#' specz <- PHAT0test$redshift
 #' }
 #
 #' @usage glmTrainPhotoZ(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian"))
