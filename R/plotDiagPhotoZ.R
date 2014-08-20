@@ -13,24 +13,38 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-#' @title Plot Predict photometric vs observed redshift from a GLM fit 
+#' @title Plot diagnostics for photo z estimations
 #'
-#' \code{plotDiagPhotoZ} returns diagnostic plots from the results of 
-#' photometric redshifts. Different types of plots are available. The 
-#' produced plots will be returned as ggplot objects.
+#' @description \code{plotDiagPhotoZ} returns diagnostic plots from the results of 
+#' photometric redshifts. Different types of plots are available: a density plot of the 
+#' error distribution, a predicted versus observed contour plot, violin plot showing 
+#' the error distribution at different redshift bins and a box plot showing the errors 
+#' at each different redshift bin. The produced plots are returned as ggplot2 objects.
 #' 
 #' @import ggplot2 ggthemes
-#' @param  photoz vector
-#' @param  specz vector 
-#'@param  type list 
-#' @return ggplot object  
+#' @param  photoz vector containing photoz data
+#' @param  specz vector containing spectroscopic redshift data
+#' @param  type a string with one of the following values: "errordist", "predobs", "errorviolins" or "box".
+#' @return ggplot object 
 #' @examples
-#'
 #' \dontrun{
-#' sum("a")
+#' # First, generate some mock data
+#' ppo <- runif(1000, min=0.1, max=2)
+#' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
+#' 
+#' # Then generate the plots
+#' plotDiagPhotoZ(ppo_ph, ppo, type="errordist")
+#' plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
+#' plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
+#' plotDiagPhotoZ(ppo_ph, ppo, type="box")
 #' }
-#' @export 
-plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins","box")) {
+#' 
+#' @usage plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"))
+#' 
+#' @author Rafael S. de Souza, Alberto Krone-Martins
+#' 
+#' @keywords hplot
+plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box")) {
   
   # First some basic error control
   if( ! (type %in% c("errordist", "predobs", "errorviolins","box"))) {
@@ -47,11 +61,16 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
   # If the user wants to plot the error distributions
   if(type=="errordist") {
     sigm <- (photoz-specz)/(1+specz)
+    sigmT <- sigm
     # Just to make sure that very big outliers will not be used for the density estimation
-    sigm <- sigm[-which(sigm > abs(median(sigm) + 60*mad(sigm)))]
+    sigm <- sigm[-which(abs(sigm) > abs(median(sigm) + 60*mad(sigm)))]
+    # if the rejection was too strong, get back...
+    if (length(sigm) == 0) {
+      sigm <- sigmT    
+    }
     sig <- data.frame(sigma=sigm)
 
-    g1 <- ggplot(sig,x=sigma) + geom_density(aes(x=sigma),fill="#31a354", alpha=0.6) + coord_cartesian(c(-1, 1)) +
+    g1 <- ggplot(sig) + geom_density(aes(x=sigma), fill="#31a354", alpha=0.6) + coord_cartesian(c(-1, 1)) +
       xlab(expression((z[phot]-z[spec])/(1+z[spec]))) +
       theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
       theme(plot.title = element_text(hjust=0.5),
@@ -63,13 +82,15 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
   
   # If the user wants to plot the predicted versus the reference values
   if(type=="predobs") {
-    comb <- cbind(specz, photoz)
-    colnames(comb) <- c("zspec","zphot")
-    comb <- as.data.frame(comb)
+    comb <- data.frame(zspec=specz, zphot=photoz)
     # Just to make sure that very big outliers will not be used for the density estimation
     pppp <- abs(comb$zphot - comb$zspec)
     comb <- comb[-which(pppp > abs(median(pppp) + 60*mad(pppp))),]
-
+    # if the rejection was too strong, get back...
+    if (length(comb$zspec)/length(ppp) < 0.95) {
+      comb <- data.frame(zspec=specz, zphot=photoz)
+    }
+    
     p1 <- ggplot(comb, aes(x=zspec, y=zphot))
     p2 <- p1 + stat_density2d(bins=200, geom="polygon", aes(fill =..level.., alpha=..level..), na.rm = TRUE, trans="log", n = 250,contour = TRUE) +
       coord_cartesian(xlim=c(0, max(specz)), ylim=c(0, max(specz)))+xlab(expression(z[spec]))+ylab(expression(z[phot])) +
@@ -84,7 +105,6 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
 
   # If the user wants to plot the error distribution as violin plots within predetermined bins
   if(type=="errorviolins") {
-    # Load the file
     b2 <- factor(floor(specz * 10)/10)
     error_photoZ <- (specz-photoz)/(1+specz)
     dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
@@ -95,37 +115,23 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
       theme(plot.title = element_text(hjust=0.5),
             axis.title.y=element_text(vjust=0.75),
             axis.title.x=element_text(vjust=-0.25),
-            text = element_text(size=20))
-  
-    # hist_right <- ggplot(dfd) + geom_histogram(aes(z_photo), fill="dark magenta", alpha=0.4, binwidth=.001) + xlim(-0.5, 0.5)
-    # hist_right <- hist_right + coord_flip() + theme(legend.position = "none",
-    #    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.title.y = element_text(size=15)) + ylab(bquote(paste("count (x",10^3,")") ))+ scale_y_continuous(breaks=c(0,5000,10000,15000), labels=c(0, 5, 10, 15))
-    # hist_right <- hist_right + theme(plot.margin = unit(c(1, 1, 0.6, -0.5), "lines"))
-  
+            text = element_text(size=20))  
     return(p)
     }
 
-if(type=="box") {
-  # Load the file
-  b2 <- factor(floor(specz * 10)/10)
-  error_photoZ <- (specz-photoz)/(1+specz)
-  dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
-  p <- ggplot(dfd) + xlab(expression(z[spec])) + ylab(expression((z[photo]-z[spec])/(1+z[spec]))) + ylim(-0.5, 0.5)
-  p <- p + theme(legend.position = "none", axis.title.x = element_text(size=15), axis.title.y = element_text(size=15))
-  p <- p + geom_boxplot(aes(z_spec, z_photo), notch=F,fill="#31a354", alpha=0.8,outlier.colour = "gray")+
+  # If the user wants to plot the error distribution as box plots within predetermined bins
+  if(type=="box") {
+    b2 <- factor(floor(specz * 10)/10)
+    error_photoZ <- (specz-photoz)/(1+specz)
+    dfd <- data.frame(z_photo=error_photoZ, z_spec=b2)  
+    p <- ggplot(dfd) + xlab(expression(z[spec])) + ylab(expression((z[photo]-z[spec])/(1+z[spec]))) + ylim(-0.5, 0.5)
+    p <- p + theme(legend.position = "none", axis.title.x = element_text(size=15), axis.title.y = element_text(size=15))
+    p <- p + geom_boxplot(aes(z_spec, z_photo), notch=F,fill="#31a354", alpha=0.8,outlier.colour = "gray")+
     theme_economist_white(gray_bg = F, base_size = 11, base_family = "sans") +
     theme(plot.title = element_text(hjust=0.5),
           axis.title.y=element_text(vjust=0.75),
           axis.title.x=element_text(vjust=-0.25),
-          text = element_text(size=20))
-  
-  # hist_right <- ggplot(dfd) + geom_histogram(aes(z_photo), fill="dark magenta", alpha=0.4, binwidth=.001) + xlim(-0.5, 0.5)
-  # hist_right <- hist_right + coord_flip() + theme(legend.position = "none",
-  #    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.title.y = element_text(size=15)) + ylab(bquote(paste("count (x",10^3,")") ))+ scale_y_continuous(breaks=c(0,5000,10000,15000), labels=c(0, 5, 10, 15))
-  # hist_right <- hist_right + theme(plot.margin = unit(c(1, 1, 0.6, -0.5), "lines"))
-  
-  return(p)
+          text = element_text(size=20))  
+    return(p)
+  }
 }
-}
-
-
