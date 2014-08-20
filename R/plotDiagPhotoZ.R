@@ -22,7 +22,7 @@
 #' bins (\code{errorviolins}) and a box plot showing the errors at each different 
 #' redshift bin (\code{box}). The produced plots are returned as ggplot2 objects.
 #' 
-#' @import ggplot2 ggthemes
+#' @import ggplot2 ggthemes gridExtra scales 
 #' @param  photoz vector containing photoz data
 #' @param  specz vector containing spectroscopic redshift data
 #' @param  type a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}.

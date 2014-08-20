@@ -17,5 +17,6 @@ Imports:
     scales,
     rrcovHD,
     gridExtra,
-    quantreg
+    quantreg,
+    pcaPP
 NeedsCompilation: no

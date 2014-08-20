@@ -1,4 +1,4 @@
-#  R package GRAD file R/CosmoPhotoz.R
+#  R package GRAD file R/CosmoPhotoZestimator.R
 #  Copyright (C) 2014 COIN
 #
 #This program is free software: you can redistribute it and/or modify
@@ -19,10 +19,10 @@
 #' data and a training dataset with photometry and spectroscopy. The estimation is 
 #' based on GLMs (see \link{\code{glmTrainPhotoz}} and \link{\code{glmPredictPhotoz}}).
 #' 
-#' @param trainData vector containing spectroscopic redshift data and photometry
-#' @param testData vector containing spectroscopic redshift data and photometry
+#' @param trainData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).
+#' @param testData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).
 #' @param numberOfPcs an integer indicating the number of principal components to consider
-#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.
+#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{glm} from the package \code{stats}; \code{Bayesian} will use the function \code{bayesglm} from the package \code{arm}.
 #' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
 #' @return a vector with the estimated photometric redshifts
 #' @examples
@@ -32,22 +32,22 @@
 #' data(PHAT0test)
 #' 
 #' # Run the analysis
-#' photoZest <- CosmoPhotoz(PHAT0train, PHAT0test, 6)
+#' photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6)
 #' 
 #' # Create a boxplot
 #' plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
 #' }
 #' 
-#' @usage CosmoPhotoz(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma")
+#' @usage CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family)
 #' 
 #' @author Alberto Krone-Martins, Rafael S. de Souza
 #' 
 #' @keywords utilities
 #' @export
-CosmoPhotoz <- function(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma") {
+CosmoPhotoZestimator <- function(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma") {
   # Combine the training and test data and calculate the principal components
   PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)),
-                          subset(testData,  select=c(-redshift)))    
+                          subset(testData,  select=c(-redshift)))
   Trainpc <- cbind(PC_comb$x, redshift=trainData$redshift)
   Testpc <- PC_comb$y
 
