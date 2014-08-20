@@ -10,7 +10,7 @@ plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "bo
 
 \item{specz}{vector containing spectroscopic redshift data}
 
-\item{type}{a string with one of the following values: (\code{errordist}), (\code{predobs}), (\code{errorviolins}) or (\code{box}).}
+\item{type}{a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}.}
 }
 \value{
 ggplot object

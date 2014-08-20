@@ -10,12 +10,12 @@ glmTrainPhotoZ(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("ga
 
 \item{formula}{an object of class "formula" to be adopted}
 
-\item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{\link{mixlm}}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{\link{arm}}.}
+\item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.}
 
 \item{family}{a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).}
 }
 \value{
-GLM object a trainned GLM object containing the fit of the model
+a trainned GLM object containing the fit of the model
 }
 \description{
 \code{glmTrainPhotoZ} trains a generalized linear model for

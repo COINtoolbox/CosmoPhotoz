@@ -25,7 +25,7 @@
 #' @import ggplot2 ggthemes
 #' @param  photoz vector containing photoz data
 #' @param  specz vector containing spectroscopic redshift data
-#' @param  type a string with one of the following values: (\code{errordist}), (\code{predobs}), (\code{errorviolins}) or (\code{box}).
+#' @param  type a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}.
 #' @return ggplot object 
 #' @examples
 #' \dontrun{

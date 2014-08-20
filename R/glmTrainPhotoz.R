@@ -21,9 +21,9 @@
 #' 
 #' @param x a data.frame containing the data to train the model
 #' @param formula an object of class "formula" to be adopted
-#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{\link{mixlm}}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{\link{arm}}.
+#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.
 #' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
-#' @return GLM object a trainned GLM object containing the fit of the model
+#' @return a trainned GLM object containing the fit of the model
 #' @examples
 #' \dontrun{
 #' # First, generate some mock data
