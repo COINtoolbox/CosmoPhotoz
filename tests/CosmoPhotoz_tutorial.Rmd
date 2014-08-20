@@ -1,8 +1,9 @@
 ---
 title: "Photometric Redshift with  CosmoPhotoz"
-output: pdf_document
 authors: Rafael S. de Souza, Jonny Elliot, Alberto Krone-Martins, Émille Ishida, Joseph
   Hilbe
+output: html_document
+runtime: shiny
 ---
 
 This is short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
@@ -120,4 +121,10 @@ Scatter distribution as a function of redshift, box plot
 
 ```{r,fig.width=12, fig.height=9}
 plotDiagPhotoZ(photoz, specz, type = "box")
+```
+
+
+```{r, echo=FALSE}
+shinyAppDir(
+  "/Users/rafael/Dropbox/artigos/Meusartigos/IAA-WGC/Github/CosmoR/CosmoPhotoz/inst/glmPhotoZ/")
 ```
