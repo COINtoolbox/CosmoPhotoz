@@ -36,6 +36,7 @@
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords utilities
+#' @export
 glmPredictPhotoZ <- function(data, train){
 	
  	# First some basic error control

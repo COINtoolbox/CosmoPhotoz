@@ -39,6 +39,7 @@
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords misc
+#' @export
 computeCombPCA <- function(x, y) {
 
   # First some basic error control

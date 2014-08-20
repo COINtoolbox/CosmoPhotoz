@@ -35,6 +35,7 @@
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords misc
+#' @export
 computeDiagPhotoZ <- function(photoz, specz){
 
   # First some basic error control

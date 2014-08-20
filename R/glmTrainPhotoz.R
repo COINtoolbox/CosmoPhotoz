@@ -38,6 +38,7 @@
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords utilities
+#' @export
 glmTrainPhotoZ <- function(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
 
   # First some basic error control

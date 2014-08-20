@@ -45,6 +45,7 @@
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords hplot
+#' @export
 plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box")) {
   
   # First some basic error control
