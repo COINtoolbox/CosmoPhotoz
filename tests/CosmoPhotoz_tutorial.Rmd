@@ -1,12 +1,12 @@
 ---
-title: "Photometric Redshift with  CosmoPhotoz"
+title: "Photometric Redshift with CosmoPhotoz"
 authors: Rafael S. de Souza, Jonny Elliot, Alberto Krone-Martins, Émille Ishida, Joseph
   Hilbe
 output: html_document
 runtime: shiny
 ---
 
-This is short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
+This is a short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
 
 # Required libraries
 ```{r,results='hide',message=FALSE, cache=FALSE}
@@ -98,7 +98,7 @@ plotDiagPhotoZ(photoz, specz, type = "errordist")
 ```
 
 Predicted vs Actuall values
-Select 10,000 points to show
+Select 15,000 points to show
 ```{r}
 datashow<-sample(length(photoz),15000)
 ```

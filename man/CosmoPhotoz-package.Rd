@@ -19,8 +19,18 @@ Version: \tab 0.1\cr
 Date: \tab 2014-08-20\cr
 License: \tab GPL (>= 3)\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+
+The CosmoPhotoz package aims to provide a user-friendly interface to enable the estimation
+of photometric redshifts. The present version employs Generalized Linear Models and the
+user can adopt either Gamma or Inverse Gaussian families of links and follow either a 
+frequentist or a bayesian perspective.
+
+Additionally, the code is also accompanied by a Shiny application that can be hosted
+locally or deployed by the user at a webserver.
+
+A short tutorial on how to use the package can be found at the 
+
+
 }
 \author{
 Rafael S. de Souza, Alberto Krone-Martins
@@ -28,7 +38,7 @@ Rafael S. de Souza, Alberto Krone-Martins
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 }
 \references{
-~~ Literature or other references for background information ~~
+AAAAAAAAAAAAAAAAA DDDDDDDDD Here the reference to the submitted paper...
 }
 \keyword{ package }
 \seealso{
