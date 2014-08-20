@@ -1,7 +1,8 @@
 ---
 title: "Photometric Redshift with  CosmoPhotoz"
-authors: "Rafael S. de Souza, Jonny Elliot, Alberto Krone-Martins, Émille Ishida, 
-Joseph Hilbe"
+output: pdf_document
+authors: Rafael S. de Souza, Jonny Elliot, Alberto Krone-Martins, Émille Ishida, Joseph
+  Hilbe
 ---
 
 This is short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
