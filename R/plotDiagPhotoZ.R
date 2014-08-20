@@ -28,7 +28,6 @@
 #' @param  type a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}.
 #' @return ggplot object 
 #' @examples
-#' \dontrun{
 #' # First, generate some mock data
 #' ppo <- runif(1000, min=0.1, max=2)
 #' ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
@@ -38,7 +37,6 @@
 #' plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
 #' plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
 #' plotDiagPhotoZ(ppo_ph, ppo, type="box")
-#' }
 #' 
 #' @usage plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"))
 #' 

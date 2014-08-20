@@ -9,7 +9,7 @@ Photometric redshift estimation based on Generalized Linear Models
 This package provides user-friendly interfaces to perform fast and reliable photometric 
 redshift estimation. The code make use generalized linear models and can adopt Gamma or 
 Inverse Gaussian families, either from a frequentist or a bayesian perspective. The code
-additionally provides a Shiny application.
+additionally provides a Shiny application providing a simple user interface.
 }
 \details{
 \tabular{ll}{
@@ -30,12 +30,10 @@ Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 \references{
 ~~ Literature or other references for background information ~~
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
 \keyword{ package }
 \seealso{
-	\code{\link[<stats>:<stats>-glm]{<stats>}}
-	\code{\link[<arm>:<arm>-bayesglm]{<arm>}}
+	\code{\link{glm}}, 
+	\code{\link{bayesglm}}
 }
 \examples{
 ~~ simple examples of the most important functions ~~

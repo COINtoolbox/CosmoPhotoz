@@ -1,0 +1,56 @@
+#  R package GRAD file R/CosmoPhotoz.R
+#  Copyright (C) 2014 COIN
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License version 3 as published by
+#the Free Software Foundation.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+
+#  A copy of the GNU General Public License is available at
+#  http://www.r-project.org/Licenses/
+
+#' @title Photo-z estimation from a training dataset and a test dataset
+#'
+#' @description \code{CosmoPhotoz} returns photometric redshift estimated from photometric 
+#' data and a training dataset with photometry and spectroscopy. The estimation is 
+#' based on GLMs (see \link{\code{glmTrainPhotoz}} and \link{\code{glmPredictPhotoz}}).
+#' 
+#' @param trainData vector containing spectroscopic redshift data and photometry
+#' @param testData vector containing spectroscopic redshift data and photometry
+#' @param numberOfPcs an integer indicating the number of principal components to consider
+#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.
+#' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
+#' @return a vector with the estimated photometric redshifts 
+#' @examples
+#' # First, generate some mock data
+#' 
+#' @usage CosmoPhotoz(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma")
+#' 
+#' @author Alberto Krone-Martins, Rafael S. de Souza
+#' 
+#' @keywords utilities
+#' @export
+CosmoPhotoz <- function(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma") {
+  # Combine the training and test data and calculate the principal components
+  PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)),
+                          subset(testData,  select=c(-redshift)))    
+  Trainpc <- cbind(PC_comb$x, redshift=trainData$redshift)
+  Testpc <- PC_comb$y
+
+  # Dynamic generation of the formula based on the user selected number of PCs
+  formM <- paste(names(PC_comb$x[1:numberOfPcs]), collapse="*")
+  formM <- paste("redshift~",formM, sep="")
+
+  # Fitting
+  Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), method=method, family=family)
+
+  # Photo-z estimation
+  photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
+  # specz <- testData$redshift
+  
+  return(photoz)
+}
