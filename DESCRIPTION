@@ -9,5 +9,13 @@ Description: A package for Photometric Redshift estimation
 Depends:
     R (>= 3.0)
 License: GPL (>= 3)
-Imports: ggplot2, ggthemes, arm, COUNT, scales, rrcovHD, gridExtra, quantreg
+Imports:
+    ggplot2,
+    ggthemes,
+    arm,
+    COUNT,
+    scales,
+    rrcovHD,
+    gridExtra,
+    quantreg
 NeedsCompilation: no

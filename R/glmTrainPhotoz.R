@@ -19,6 +19,7 @@
 #' @description \code{glmTrainPhotoZ} trains a generalized linear model for 
 #' photometric redshift estimation.
 #' 
+#' @import arm COUNT
 #' @param x a data.frame containing the data to train the model
 #' @param formula an object of class "formula" to be adopted
 #' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.

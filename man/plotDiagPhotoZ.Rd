@@ -24,7 +24,6 @@ bins (\code{errorviolins}) and a box plot showing the errors at each different
 redshift bin (\code{box}). The produced plots are returned as ggplot2 objects.
 }
 \examples{
-\dontrun{
 # First, generate some mock data
 ppo <- runif(1000, min=0.1, max=2)
 ppo_ph <- rnorm(length(ppo), mean=ppo, sd=0.05)
@@ -34,7 +33,6 @@ plotDiagPhotoZ(ppo_ph, ppo, type="errordist")
 plotDiagPhotoZ(ppo_ph, ppo, type="predobs")
 plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
 plotDiagPhotoZ(ppo_ph, ppo, type="box")
-}
 }
 \author{
 Rafael S. de Souza, Alberto Krone-Martins
