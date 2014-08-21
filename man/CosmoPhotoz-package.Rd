@@ -30,8 +30,7 @@ The package includes a plotting function to enable the production of diagnostic 
 \if{html}{\figure{merged-Diag-Plots.jpg}{merged-Diag-Plots}}
 \if{latex}{\figure{merged-Diag-Plots.pdf}{options: width=5.3in}}
 
-Additionally, the code is also accompanied by a Shiny application that can be hosted
-locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation and to configure many parameters of the code.
+Additionally, the code is also accompanied by a Shiny application that can be hosted locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation and to configure many parameters of the code.
 
 A short tutorial on how to use the package can be found at: 
 
@@ -45,7 +44,7 @@ Rafael S. de Souza, Alberto Krone-Martins
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 }
 \references{
-AAAAAAAAAAAAAAAAA DDDDDDDDD Here the reference to the submitted paper...
+J. Elliott, R. S. de Souza, J. Hilbe, A. Krone-Martins, E. E. O. Ishida, E. Cameron, The Overlooked Potential of Generalized Linear Models in Astronomy-II: Photometric redshift, to be submitted to Astronomy & Computing (arXiv::.....).
 }
 \keyword{ package }
 \seealso{
@@ -62,6 +61,8 @@ data(PHAT0train)
 data(PHAT0test)
 # Run the analysis
 photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6)
+# This is faster, but the results are not so good
+# photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6, robust=FALSE) 
 # Create a boxplot showing the results
 plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
 }

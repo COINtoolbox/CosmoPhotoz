@@ -4,11 +4,9 @@
 \alias{PHAT0test}
 \title{PHAT0 test dataset}
 \format{A dataframe with 161042 observations on the following on 12 variables, no
-  NAs.
+  NAs. Columns are named as follows:
 
 \describe{
-
-Columns are named as follows:
 
 \item{\code{redshift}}{The redshift of the galaxy.}
 \item{\code{up}}{The magnitude of the galaxy in the up band.}

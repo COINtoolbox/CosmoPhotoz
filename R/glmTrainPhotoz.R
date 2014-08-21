@@ -27,32 +27,28 @@
 #' @return a trainned GLM object containing the fit of the model
 #' @examples
 #' \dontrun{
-#' # First, load the test and train data
-#' packagePath <- paste(find.package("CosmoPhotoz"),"/extdata/",sep="")
-#' trainData <- read.table(file=paste(packagePath, "sdss-ugriz-train.dat", sep=""), header=FALSE)
-#' testData <-  read.table(file=paste(packagePath, "sdss-ugriz-test.dat", sep=""), header=FALSE)
-#' trainData <- trainData[,c(1:5,11)] # Select the relevant data (phot and spec redshift)
-#' testData <- testData[,c(1:5,11)]   # Select the relevant data (phot and spec redshift)
-#' colnames(trainData) <- c("u", "g", "r", "i", "z", "redshift")
-#' colnames(testData) <- c("u", "g", "r", "i", "z", "redshift")
+#' # Load the data
+#' data(PHAT0train)
+#' data(PHAT0test)
 #' 
 #' # Combine the training and test data and calculate the principal components
-#' PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)), 
-#'            subset(testData, select=c(-redshift)))
-#' Trainpc <- cbind(PC_comb$x, redshift=testData$redshift)
+#' PC_comb <- computeCombPCA(subset(PHAT0train, select=c(-redshift)), 
+#'            subset(PHAT0test, select=c(-redshift)),
+#'            robust=FALSE) # robust is false here just to make it faster
+#' Trainpc <- cbind(PC_comb$x, redshift=PHAT0train$redshift)
 #' Testpc <- PC_comb$y
 #' 
-#' # Dynamic generation of the formula based on the user selected number of PCs
-#' nPcs <- 4 ## THE NUMBER OF PCS USED ENTER HERE
-#' formM <- paste(names(PC_comb$x[1:nPcs]), collapse="*") 
-#' formM <- paste("redshift~",formM, sep="")
-#' 
 #' # Fitting
-#' Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), method="Bayesian" , family="gamma")
+#' Fit <- glmTrainPhotoZ(Trainpc, formula=redshift~poly(Comp.1,2)*
+#'            poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6, 
+#'            method="Bayesian", family="gamma")
 #' 
-#' # Photo-z estimation
+#' # Perform the photo-z estimation
 #' photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
 #' specz <- PHAT0test$redshift
+#' 
+#' # Show a plot with the results
+#' plotDiagPhotoZ(photoz, specz, "box")
 #' }
 #
 #' @usage glmTrainPhotoZ(x, formula, method, family)

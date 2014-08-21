@@ -4,11 +4,9 @@
 \alias{PHAT0train}
 \title{PHAT0 train dataset}
 \format{A dataframe with 8478 observations on the following on 12 variables, no
-  NAs.
+  NAs. Columns are named as follows:
 
 \describe{
-
-Columns are named as follows:
 
 \item{\code{redshift}}{The redshift of the galaxy.}
 \item{\code{up}}{The magnitude of the galaxy in the up band.}

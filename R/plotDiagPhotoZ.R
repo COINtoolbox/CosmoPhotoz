@@ -25,7 +25,8 @@
 #' @import ggplot2 ggthemes gridExtra
 #' @param  photoz vector containing photoz data
 #' @param  specz vector containing spectroscopic redshift data
-#' @param  type a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}.
+#' @param  type a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}
+#' @param  npoints an integer indicating how many points should be used to create the \code{predobs} plot (if 0, all points will be used)
 #' @return ggplot object 
 #' @examples
 #' # First, generate some mock data
@@ -38,13 +39,13 @@
 #' #plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
 #' #plotDiagPhotoZ(ppo_ph, ppo, type="box")
 #' 
-#' @usage plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"))
+#' @usage plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"), npoints)
 #' 
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords hplot
 #' @export
-plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box")) {
+plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"), npoints=0) {
   
   # First some basic error control
   if( ! (type %in% c("errordist", "predobs", "errorviolins","box"))) {
@@ -92,6 +93,11 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     # if the rejection was too strong, get back...
     if (length(comb$zspec)/length(pppp) < 0.95) {
       comb <- data.frame(zspec=specz, zphot=photoz)
+    }
+    
+    if(npoints != 0) {
+      idx <- sample(seq_len(comb$zspec), replace=F, size = npoints)
+      comb <- comb[idx,]
     }
     
     p1 <- ggplot(comb, aes(x=zspec, y=zphot))

@@ -24,7 +24,28 @@
 #' @return list containing the results of the redshift estimation
 #' @examples
 #' \dontrun{
-#' # First, generate some mock data
+#' # Load the data
+#' data(PHAT0train)
+#' data(PHAT0test)
+#' 
+#' # Combine the training and test data and calculate the principal components
+#' PC_comb <- computeCombPCA(subset(PHAT0train, select=c(-redshift)), 
+#'            subset(PHAT0test, select=c(-redshift)),
+#'            robust=FALSE) # robust is false here just to make it faster
+#' Trainpc <- cbind(PC_comb$x, redshift=PHAT0train$redshift)
+#' Testpc <- PC_comb$y
+#' 
+#' # Fitting
+#' Fit <- glmTrainPhotoZ(Trainpc, formula=redshift~poly(Comp.1,2)*
+#'            poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6, 
+#'            method="Bayesian", family="gamma")
+#' 
+#' # Perform the photo-z estimation using the glmPredictPhotoZ function
+#' photoz <- glmPredictPhotoZ(data=Testpc, train=Fit$glmfit)
+#' specz <- PHAT0test$redshift
+#' 
+#' # Show a plot with the results
+#' plotDiagPhotoZ(photoz$photoz, specz, "box")
 #' }
 #
 #' @usage glmPredictPhotoZ(data, train)
