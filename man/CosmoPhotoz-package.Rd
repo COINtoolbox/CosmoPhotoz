@@ -61,7 +61,7 @@ data(PHAT0train)
 data(PHAT0test)
 # Run the analysis
 photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6)
-# This is faster, but the results are not so good
+# This is considerably faster, but the results are not so good
 # photoZest <- CosmoPhotoZestimator(PHAT0train, PHAT0test, 6, robust=FALSE) 
 # Create a boxplot showing the results
 plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")

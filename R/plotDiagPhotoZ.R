@@ -96,7 +96,7 @@ plotDiagPhotoZ <- function(photoz, specz, type=c("errordist", "predobs", "errorv
     }
     
     if(npoints != 0) {
-      idx <- sample(seq_len(comb$zspec), replace=F, size = npoints)
+      idx <- sample(1:length(comb$zspec), replace=F, size = npoints)
       comb <- comb[idx,]
     }
     

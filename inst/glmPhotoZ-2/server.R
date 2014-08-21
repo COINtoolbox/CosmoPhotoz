@@ -58,7 +58,7 @@ shinyServer(function(input, output) {
   output$predictObs <- renderPlot({
     tempObj <- shinyCompPhotoZ()
     if(!is.null(tempObj)) {
-      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "predobs", npoints=numberOfPoints)
+      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "predobs", npoints=input$numberOfPoints)
     }
   })
   output$violins <- renderPlot({
