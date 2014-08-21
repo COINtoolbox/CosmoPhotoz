@@ -9,6 +9,8 @@ computeCombPCA(x, y)
 \item{x}{a matrix or a data.frame}
 
 \item{y}{a matrix or a data.frame}
+
+\item{robust}{a boolean indicating if robust PCA should be used or not}
 }
 \value{
 PCA projections for each matrix

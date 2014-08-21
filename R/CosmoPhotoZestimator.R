@@ -20,11 +20,12 @@
 #' based on GLMs (see \code{\link{glmTrainPhotoZ}} and \code{\link{glmPredictPhotoZ}}).
 #' 
 #' @import shiny
-#' @param trainData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).
-#' @param testData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).
+#' @param trainData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift)
+#' @param testData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift)
 #' @param numberOfPcs an integer indicating the number of principal components to consider
-#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}.
-#' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
+#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}
+#' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model)
+#' @param robust a boolean indicating if robust PCA should be used or not
 #' @return a vector with the estimated photometric redshifts
 #' @examples
 #' \dontrun{
@@ -39,17 +40,18 @@
 #' plotDiagPhotoZ(photoz = photoZest, specz = PHAT0test$redshift, type = "box")
 #' }
 #' 
-#' @usage CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family)
+#' @usage CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family, robust)
 #' 
 #' @author Alberto Krone-Martins, Rafael S. de Souza
 #' 
 #' @keywords utilities
 #' @export
-CosmoPhotoZestimator <- function(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma") {
+CosmoPhotoZestimator <- function(trainData, testData, numberOfPcs=4, method="Bayesian", family="gamma", robust=TRUE) {
   # Combine the training and test data and calculate the principal components
   redshift <- NULL # <- this is just to prevent a NOTE from CRAN checks
   PC_comb <- computeCombPCA(subset(trainData, select=c(-redshift)),
-                            subset(testData,  select=c(-redshift)))
+                            subset(testData,  select=c(-redshift)),
+                            robust=robust)
   Trainpc <- cbind(PC_comb$x, redshift=trainData$redshift)
   Testpc <- PC_comb$y
 

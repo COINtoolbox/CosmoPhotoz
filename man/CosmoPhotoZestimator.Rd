@@ -3,18 +3,20 @@
 \alias{CosmoPhotoZestimator}
 \title{Photo-z estimation from a training dataset and a test dataset}
 \usage{
-CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family)
+CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family, robust)
 }
 \arguments{
-\item{trainData}{vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).}
+\item{trainData}{vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift)}
 
-\item{testData}{vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift).}
+\item{testData}{vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift)}
 
 \item{numberOfPcs}{an integer indicating the number of principal components to consider}
 
-\item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}.}
+\item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}}
 
-\item{family}{a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).}
+\item{family}{a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model)}
+
+\item{robust}{a boolean indicating if robust PCA should be used or not}
 }
 \value{
 a vector with the estimated photometric redshifts

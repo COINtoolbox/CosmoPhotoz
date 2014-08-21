@@ -49,7 +49,10 @@ AAAAAAAAAAAAAAAAA DDDDDDDDD Here the reference to the submitted paper...
 }
 \keyword{ package }
 \seealso{
-	\code{\link{glm}}, 
+  \code{\link{CosmoPhotoZestimator}}, 
+  \code{\link{glmTrainPhotoZ}}, 
+  \code{\link{glmPredictPhotoZ}}, 
+  \code{\link{glm}}, 
 	\code{\link{bayesglm}}
 }
 \examples{

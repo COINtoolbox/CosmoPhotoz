@@ -20,8 +20,9 @@
 #' the training and test samples.
 #' 
 #' @import pcaPP mvtnorm
-#' @param x a matrix or a data.frame 
+#' @param x a matrix or a data.frame
 #' @param y a matrix or a data.frame 
+#' @param robust a boolean indicating if robust PCA should be used or not
 #' @return PCA projections for each matrix 
 #' @examples
 #' 
@@ -40,7 +41,7 @@
 #' 
 #' @keywords misc
 #' @export
-computeCombPCA <- function(x, y) {
+computeCombPCA <- function(x, y, robust=TRUE) {
 
   # First some basic error control
   if(!is.matrix(x)&!is.data.frame(x)) {
@@ -51,11 +52,17 @@ computeCombPCA <- function(x, y) {
   }
   
   # Now for the real work
-  XY <- rbind(x, y)                                              # Create the combined matrix 
-  XYPCA <- PCAgrid(XY, k=ncol(XY)-1, scale="mad", method="mad")  # Calculate the robust PCA
-  X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])               # get the scores in a data frame
-  Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),])    # get the scores in a data frame
- # PCvar <- which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2) >= npcvar)[1]
+  XY <- rbind(x, y)                                              # Create the combined matrix
+  if(robust) {
+    XYPCA <- PCAgrid(XY, k=ncol(XY)-1, scale="mad", method="mad")  # Calculate the robust PCA
+    X.PCA <- as.data.frame(XYPCA$scores[1:nrow(x),])               # get the scores in a data frame
+    Y.PCA <- as.data.frame(XYPCA$scores[(nrow(x)+1):nrow(XY),])    # get the scores in a data frame
+   # PCvar <- which(cumsum((XYPCA$sdev)^2) / sum(XYPCA$sdev^2) >= npcvar)[1]
+  } else {
+    XYPCA <- prcomp(XY, scale=TRUE) # non robust PCA
+    X.PCA <- as.data.frame(XYPCA$x[1:nrow(x),])
+    Y.PCA <- as.data.frame(XYPCA$x[(nrow(x)+1):nrow(XY),]) 
+  }
   
   # That's all folks!
   return(list(x=X.PCA, y=Y.PCA, PCsum=summary(XYPCA)))
