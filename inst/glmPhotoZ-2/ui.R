@@ -26,18 +26,15 @@ shinyUI(pageWithSidebar(
            conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                             tags$div("Calculating... you can get a coffee.", id="loadmessage")),
 
-tabsetPanel(
-    tabPanel("Data",
       h4("Data Input"),
       checkboxInput('dataSourceFlag', 'Use PHAT0 data', FALSE),
 #    conditionalPanel(
  #     condition = "input.dataSourceFlag == TRUE",
         fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
-        fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt'))
+        fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt')),
+        helpText("Note: files must be csv, without quotes. If a column names redshift is present, user can inspect plots with the results."),
     #),
-),
 
-    tabPanel("Control",
     h4("Control and options"),
     checkboxInput('useRobustPCA', 'Use robust PCA', FALSE),
     numericInput("numberOfPcs", "Number of Principal Components:", 4),
@@ -49,9 +46,8 @@ tabsetPanel(
                      "Frequentist" = "Frequentist")),
     selectInput("family", "Family:",
                 list("Gamma" = "gamma", 
-                     "Inverse Gaussian" = "inverse.gaussian"))
-)
-),
+                     "Inverse Gaussian" = "inverse.gaussian")),
+
     br(), 
     submitButton("Run analysis"),
     br(),
@@ -67,6 +63,7 @@ tabsetPanel(
       tabPanel("Violins", plotOutput("violins")),
       tabPanel("Box", plotOutput("box")),
       tabPanel("Diagnostics", verbatimTextOutput("diagnostics"))
+#      tabPanel("Help", verbatimTextOutput("diagnostics"))
     )
   )
 ))

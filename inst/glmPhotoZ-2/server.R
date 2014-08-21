@@ -34,7 +34,12 @@ shinyServer(function(input, output) {
       photoz <- CosmoPhotoZestimator(trainData=PHAT0train, testData=PHAT0test, 
                                      numberOfPcs=input$numberOfPcs, method=input$method,
                                      family=input$family, robust=input$useRobustPCA)
-      specz <- PHAT0test$redshift
+
+      if("redshift" %in% names(PHAT0test)) {
+        specz <- PHAT0test$redshift
+      } else {
+        specz <- NULL
+      }
 
     # Time to return the data!
     return(data.frame(photoz, specz))
