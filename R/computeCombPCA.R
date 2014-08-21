@@ -62,12 +62,13 @@ computeCombPCA <- function(x, y, robust=TRUE) {
     XYPCA <- prcomp(XY, scale=TRUE) # non robust PCA
     XYPCA$x <- XYPCA$x[, 1:ncol(XY)-1]
     nn <- c()
-    for(i in 1:length(XYPCA$x)) { 
+    for(i in 1:ncol(XYPCA$x)) { 
       nn <- c(nn, paste("Comp.",i,sep=""))
     }
-    names(XYPCA$x) <- nn
     X.PCA <- as.data.frame(XYPCA$x[1:nrow(x),])
     Y.PCA <- as.data.frame(XYPCA$x[(nrow(x)+1):nrow(XY),]) 
+    names(X.PCA) <- nn
+    names(Y.PCA) <- nn
   }
   
   # That's all folks!
