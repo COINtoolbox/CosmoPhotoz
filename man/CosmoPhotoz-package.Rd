@@ -25,10 +25,17 @@ of photometric redshifts. The present version employs Generalized Linear Models 
 user can adopt either Gamma or Inverse Gaussian families of links and follow either a 
 frequentist or a bayesian perspective.
 
-Additionally, the code is also accompanied by a Shiny application that can be hosted
-locally or deployed by the user at a webserver.
+The package includes a plotting function to enable the production of diagnostic plots. Four examples of the visual diagnostics that are implemented can be seen in the figures bellow:
 
-A short tutorial on how to use the package can be found at the 
+\if{html}{\figure{merged-Diag-Plots.jpg}{merged-Diag-Plots}}
+\if{latex}{\figure{merged-Diag-Plots.pdf}{options: width=5.3in}}
+
+Additionally, the code is also accompanied by a Shiny application that can be hosted
+locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation and to configure many parameters of the code.
+
+A short tutorial on how to use the package can be found at: 
+
+ASDFASFASDFASDFADSFASDF
 
 
 }

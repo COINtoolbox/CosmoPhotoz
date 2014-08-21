@@ -14,9 +14,7 @@ Imports:
     ggthemes,
     arm,
     COUNT,
-    rrcovHD,
     gridExtra,
-    quantreg,
     pcaPP,
     mvtnorm,
     shiny

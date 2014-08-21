@@ -11,18 +11,20 @@
 #'
 #' \describe{
 #' 
-#' \item{list("redshift")}{The redshift of the galaxy.}
-#' \item{list("up")}{The magnitude of the galaxy in the up band.}
-#' \item{list("gp")}{The magnitude of the galaxy in the gp band.}
-#' \item{list("rp")}{The magnitude of the galaxy in the rp band.}
-#' \item{list("ip")}{The magnitude of the galaxy in the ip band.}
-#' \item{list("zp")}{The magnitude of the galaxy in the zp band.}
-#' \item{list("Y")}{The magnitude of the galaxy in the Y band.}
-#' \item{list("J")}{The magnitude of the galaxy in the J band.}
-#' \item{list("H")}{The magnitude of the galaxy in the H band.}
-#' \item{list("K")}{The magnitude of the galaxy in the K band.}
-#' \item{list("IRAC_1")}{The magnitude of the galaxy in the IRAC_1 band.}
-#' \item{list("IRAC_2")}{The magnitude of the galaxy in the IRAC_2 band.}
+#' Columns are named as follows:
+#' 
+#' \item{\code{redshift}}{The redshift of the galaxy.}
+#' \item{\code{up}}{The magnitude of the galaxy in the up band.}
+#' \item{\code{gp}}{The magnitude of the galaxy in the gp band.}
+#' \item{\code{rp}}{The magnitude of the galaxy in the rp band.}
+#' \item{\code{ip}}{The magnitude of the galaxy in the ip band.}
+#' \item{\code{zp}}{The magnitude of the galaxy in the zp band.}
+#' \item{\code{Y}}{The magnitude of the galaxy in the Y band.}
+#' \item{\code{J}}{The magnitude of the galaxy in the J band.}
+#' \item{\code{H}}{The magnitude of the galaxy in the H band.}
+#' \item{\code{K}}{The magnitude of the galaxy in the K band.}
+#' \item{\code{IRAC_1}}{The magnitude of the galaxy in the IRAC_1 band.}
+#' \item{\code{IRAC_2}}{The magnitude of the galaxy in the IRAC_2 band.}
 #' 
 #' }
 #' @source Hildebrandt H., Arnouts S., Capak P., Moustakas L. A., Wolf C., Abdalla
@@ -43,18 +45,20 @@ NULL
 #'
 #' \describe{
 #' 
-#' \item{list("redshift")}{The redshift of the galaxy.}
-#' \item{list("up")}{The magnitude of the galaxy in the up band.}
-#' \item{list("gp")}{The magnitude of the galaxy in the gp band.}
-#' \item{list("rp")}{The magnitude of the galaxy in the rp band.}
-#' \item{list("ip")}{The magnitude of the galaxy in the ip band.}
-#' \item{list("zp")}{The magnitude of the galaxy in the zp band.}
-#' \item{list("Y")}{The magnitude of the galaxy in the Y band.}
-#' \item{list("J")}{The magnitude of the galaxy in the J band.}
-#' \item{list("H")}{The magnitude of the galaxy in the H band.}
-#' \item{list("K")}{The magnitude of the galaxy in the K band.}
-#' \item{list("IRAC_1")}{The magnitude of the galaxy in the IRAC_1 band.}
-#' \item{list("IRAC_2")}{The magnitude of the galaxy in the IRAC_2 band.}
+#' Columns are named as follows:
+#'  
+#' \item{\code{redshift}}{The redshift of the galaxy.}
+#' \item{\code{up}}{The magnitude of the galaxy in the up band.}
+#' \item{\code{gp}}{The magnitude of the galaxy in the gp band.}
+#' \item{\code{rp}}{The magnitude of the galaxy in the rp band.}
+#' \item{\code{ip}}{The magnitude of the galaxy in the ip band.}
+#' \item{\code{zp}}{The magnitude of the galaxy in the zp band.}
+#' \item{\code{Y}}{The magnitude of the galaxy in the Y band.}
+#' \item{\code{J}}{The magnitude of the galaxy in the J band.}
+#' \item{\code{H}}{The magnitude of the galaxy in the H band.}
+#' \item{\code{K}}{The magnitude of the galaxy in the K band.}
+#' \item{\code{IRAC_1}}{The magnitude of the galaxy in the IRAC_1 band.}
+#' \item{\code{IRAC_2}}{The magnitude of the galaxy in the IRAC_2 band.}
 #' 
 #' }
 #' @source Hildebrandt H., Arnouts S., Capak P., Moustakas L. A., Wolf C., Abdalla
