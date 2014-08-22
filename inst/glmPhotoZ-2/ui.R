@@ -27,13 +27,10 @@ shinyUI(pageWithSidebar(
            conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                             tags$div("Calculating... you can get a coffee.", id="loadmessage")),
 
-      h4("Data Input"),
-      checkboxInput('dataSourceFlag', 'Use PHAT0 data', TRUE),
-#    conditionalPanel(
- #     condition = "input.dataSourceFlag == TRUE",
-        fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
-        fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt')),
-    #),
+    h4("Data Input"),
+    checkboxInput('dataSourceFlag', 'Use PHAT0 data', TRUE),
+    fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
+    fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt')),
 
     h4("Control and options"),
     checkboxInput('useRobustPCA', 'Use robust PCA', FALSE),
