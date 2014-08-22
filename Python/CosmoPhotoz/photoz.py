@@ -4,11 +4,13 @@
 Photometric redshift library that implements Generalised Linear Models.
 """
 
-__author__ = "Jonathan Elliott, R. S. de Souza, A. Krone-Martins"
+__author__ = "J. Elliott, R. S. de Souza, A. Krone-Martins"
+__maintainer__ = "J. Elliott"
 __copyright__ = "Copyright 2014"
-__version__ = "1.0"
+__version__ = "0.1"
 __email__ = "jonnynelliott@googlemail.com"
 __status__ = "Prototype"
+__license__ = "GPL"
 
 import numpy as np
 import pandas as pd

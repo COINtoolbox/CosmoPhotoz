@@ -28,12 +28,13 @@ Libraries used:
 
 """
 
-__author__ = "Jonathan Elliott, Rafael S. de Souza, A. Krone-Martins"
-__maintainer__ = "Jonathan Elliott"
+__author__ = "J. Elliott, R. S. de Souza, A. Krone-Martins"
+__maintainer__ = "J. Elliott"
 __copyright__ = "Copyright 2014"
-__version__ = "1.0"
+__version__ = "0.1"
 __email__ = "jonnynelliott@googlemail.com"
 __status__ = "Prototype"
+__license__ = "GPL"
 
 from CosmoPhotoz.photoz import PhotoSample
 import sys
