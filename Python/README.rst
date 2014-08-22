@@ -5,7 +5,7 @@ CosmoPhotoz - GLM PhotoZ estimation
 
 Homepage: `GitHub Repository <https://github.com/COINtoolbox/CosmoPhotoz/tree/master/Python>`_
 
-`CosmoPhotoz` is a package that determines photometric redshifts from galaxies utilising their magnitudes. The method utilises Generalized Linear Models which reproduce the physical aspects of the output distribution. The rest of the methodology and testing of the technique is described in the associated Astronomy and Computing publication that can be accessed at [link].
+`CosmoPhotoz` is a package that determines photometric redshifts from galaxies utilising their magnitudes. The method utilises Generalized Linear Models which reproduce the physical aspects of the output distribution. The rest of the methodology and testing of the technique is described in the associated Astronomy and Computing publication (link TBC).
 
 
 Features
@@ -61,9 +61,9 @@ Or import the library into python.
     optimimum_train_size = train_size[min_indx]
 
 
-See more examples at the `Quickstart guide`_.
+See more examples within the `Documentation`_.
 
-.. _`Quickstart guide`: https://textblob.readthedocs.org/en/latest/quickstart.html#quickstart
+.. _`Documentation`: http://cosmophotoz.readthedocs.org/
 
 
 Documentation
@@ -84,7 +84,7 @@ Requirements
 License
 -------
 
-- GNU General Public License
+- GNU General Public License (GPL>=3)
 
 .. _pattern: http://www.clips.ua.ac.be/pattern
 .. _NLTK: http://nltk.org/
