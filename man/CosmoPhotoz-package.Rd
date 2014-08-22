@@ -45,7 +45,7 @@ Finally, a short tutorial on how to use the package can be found at:
 
 }
 \author{
-Rafael S. de Souza, Alberto Krone-Martins, Jonathan Elliott
+Rafael S. de Souza, Alberto Krone-Martins, Jonathan Elliott, Joseph Hilbe
 
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 }
