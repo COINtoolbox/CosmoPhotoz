@@ -6,7 +6,7 @@ import codecs
 import os
 import sys
 
-import CosmoPhotoz as photoz
+import CosmoPhotoz.photoz as photoz
 
 here = os.path.abspath(os.path.dirname(__file__))
 def readin(*filenames, **kwargs):
