@@ -1,6 +1,9 @@
 CosmoPhotoz - GLM PhotoZ estimation
 ====================================
 
+R & Shiny Packages
+------------------
+
 Python Package
 --------------
 
