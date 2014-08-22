@@ -1,11 +1,11 @@
 Package: CosmoPhotoz
 Type: Package
 Title: Photometric Redshift estimation using GLMs
-Version: 0.1
+Version: 1.0
 Date: 2014-08-20
-Author: Rafael S. de Souza, Alberto Krone-Martins
+Author: Rafael S. de Souza, Alberto Krone-Martins, Jonathan Elliott
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
-Description: A package for Photometric Redshift estimation
+Description: A package for Photometric Redshift estimation using GLMs.
 Depends:
     R (>= 3.0)
 License: GPL (>= 3)
