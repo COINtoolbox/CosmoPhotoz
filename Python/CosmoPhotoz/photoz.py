@@ -21,10 +21,11 @@ class PhotoSample(object):
     """
     Constructor for the photometric sample class.
     This contains content related to the:
-      1. logging
-      2. PCA preferences
-      3. GLM preferences
-      4. Plotting aesthetics
+
+    1. logging
+    2. PCA preferences
+    3. GLM preferences
+    4. Plotting aesthetics
 
     Instance variables:
     -------------------
@@ -72,9 +73,12 @@ class PhotoSample(object):
 
     kde_1d_ax          - seaborn axes object for KDE 1D plot
     kde_2d_ax          - seaborn axes object for KDE 2D plot
-    kde_ax             - seaborn axes object for violin plot
+    :kde_ax             - seaborn axes object for violin plot:
 
     """ 
+
+
+    #: test : 
 
     # Setup the logger to the command line
     # To a file can also be added fairly easily

@@ -25,6 +25,7 @@ Libraries used:
  - logging:     For logging
  - numpy:       For arrays
  - argparse:    Allow users to use it easily from the command line
+
 """
 
 __author__ = "Jonathan Elliott, Rafael S. de Souza, A. Krone-Martins"
