@@ -32,7 +32,6 @@ shinyUI(pageWithSidebar(
  #     condition = "input.dataSourceFlag == TRUE",
         fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
         fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt')),
-        helpText("Note: files must be csv, without quotes. If a column names redshift is present, user can inspect plots with the results."),
     #),
 
     h4("Control and options"),
@@ -52,7 +51,6 @@ shinyUI(pageWithSidebar(
     submitButton("Run analysis"),
     br(),
     downloadButton('downloadData', 'Download photoZ results')
-
   ),
 
   # Show output plot
@@ -62,8 +60,8 @@ shinyUI(pageWithSidebar(
       tabPanel("Prediction", plotOutput("predictObs")), 
       tabPanel("Violins", plotOutput("violins")),
       tabPanel("Box", plotOutput("box")),
-      tabPanel("Diagnostics", verbatimTextOutput("diagnostics"))
-#      tabPanel("Help", verbatimTextOutput("diagnostics"))
+      tabPanel("Diagnostics", verbatimTextOutput("diagnostics")),
+      tabPanel("Help", includeMarkdown("help.md"))
     )
   )
 ))
