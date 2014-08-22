@@ -26,9 +26,13 @@ dered_u,dered_g,dered_r,dered_i,dered_z,redshift
 
 The user can select if robust PCA should be used or not. Note that the adoption of robust PCA can slow down the code considerably. The user can also select the number of principal components to consider in the GLM analysis.
 
-The number of points used for the creation of the predicted versus observed diagnostic plot (at the Prediction tab) can also be selected by the user for speeding up the plot generation. The default value (0) is to consider all the points in the test dataset. This value must be setted **before** launching the analysis.
+The number of points used for the creation of the predicted versus observed diagnostic plot (at the Prediction tab) can also be selected by the user for speeding up the plot generation. The default value is 5000; if the user select 0, all the points in the test dataset will be adopted. This value must be setted **before** launching the analysis.
 
 The method adopted for the fitting can be selected among a frequentist approach (using the R function `glm`) and a bayesian approach (using the R function `bayesglm`). The link function to be used in the model can also be selected among the gamma function and the inverse gaussian function.
 
 To run the photometric redshift estimate, the user must click in the "Run estimation" blue button. And after the estimate is ready, the redshifts can be downloaded to the user machine by clicking in the "Download photoZ results" button. 
+
+#### Outputs
+
+Four different types of plots are provided by the system. Note that the prediction versus observed density plot (at the Prediction tab) may take some moments to render or update. The user can choose to use less points, which are randomly selected from the results, to create this plot if in a hurry.
 

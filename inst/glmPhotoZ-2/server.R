@@ -30,9 +30,28 @@ shinyServer(function(input, output) {
         data(PHAT0test)
       }
       
+      # Some basic checking to make sure that the user will not enter values that could 
+      # cause problems via the user interface.
+      if(is.na(input$numberOfPcs)) {
+        return(NULL)
+      }
+      if(is.na(input$numberOfPoints)) {
+        return(NULL)
+      }
+      nPc <- input$numberOfPcs
+      if (nPc > (ncol(PHAT0train)-1)) {
+        nPc <- (ncol(PHAT0train)-1)
+      } 
+      if (nPc <= 0) {
+        return(NULL)
+      }
+      if (input$numberOfPoints <= 0) {
+        return(NULL)
+      }
+
       # Photo-z estimation
       photoz <- CosmoPhotoZestimator(trainData=PHAT0train, testData=PHAT0test, 
-                                     numberOfPcs=input$numberOfPcs, method=input$method,
+                                     numberOfPcs=nPc, method=input$method,
                                      family=input$family, robust=input$useRobustPCA)
 
       if("redshift" %in% names(PHAT0test)) {
@@ -63,7 +82,14 @@ shinyServer(function(input, output) {
   output$predictObs <- renderPlot({
     tempObj <- shinyCompPhotoZ()
     if(!is.null(tempObj)) {
-      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "predobs", npoints=input$numberOfPoints)
+
+      nPointsToUse <- input$numberOfPoints
+      
+      if(nPointsToUse > length(tempObj$specz)){
+        nPointsToUse <- length(tempObj$specz)
+      }
+      
+      plotDiagPhotoZ(tempObj$photoz, tempObj$specz, type = "predobs", npoints=nPointsToUse)
     }
   })
   output$violins <- renderPlot({

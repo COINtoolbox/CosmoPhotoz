@@ -28,7 +28,7 @@ shinyUI(pageWithSidebar(
                             tags$div("Calculating... you can get a coffee.", id="loadmessage")),
 
       h4("Data Input"),
-      checkboxInput('dataSourceFlag', 'Use PHAT0 data', FALSE),
+      checkboxInput('dataSourceFlag', 'Use PHAT0 data', TRUE),
 #    conditionalPanel(
  #     condition = "input.dataSourceFlag == TRUE",
         fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
@@ -37,8 +37,8 @@ shinyUI(pageWithSidebar(
 
     h4("Control and options"),
     checkboxInput('useRobustPCA', 'Use robust PCA', FALSE),
-    numericInput("numberOfPcs", "Number of Principal Components:", 4),
-    numericInput("numberOfPoints", "Points in Pred vs. Obs. plot: ", 0),
+    numericInput("numberOfPcs", "Number of Principal Components:", value=4, min=1),
+    numericInput("numberOfPoints", "Points in Pred vs. Obs. plot: ", 5000, min=0),
     helpText("Note: if 0, all points will be used."),
     br(),
     selectInput("method", "Method:",
@@ -58,9 +58,9 @@ shinyUI(pageWithSidebar(
   mainPanel(
     tabsetPanel(
       tabPanel("Error Distribution", plotOutput("errorDistPlot")), 
-      tabPanel("Prediction", plotOutput("predictObs")), 
       tabPanel("Violins", plotOutput("violins")),
       tabPanel("Box", plotOutput("box")),
+      tabPanel("Prediction", plotOutput("predictObs")), 
       tabPanel("Diagnostics", verbatimTextOutput("diagnostics")),
       tabPanel("Help", includeMarkdown("help.md"))
     )
