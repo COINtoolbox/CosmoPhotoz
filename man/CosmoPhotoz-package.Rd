@@ -30,22 +30,22 @@ The package includes a plotting function to enable the production of diagnostic 
 \if{html}{\figure{merged-Diag-Plots.jpg}{merged-Diag-Plots}}
 \if{latex}{\figure{merged-Diag-Plots.pdf}{options: width=5.3in}}
 
-Additionally, the code is also accompanied by a \pkg{shiny} application that can be hosted locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation and to configure many parameters of the code visually and experiment with the results. A screenshot of this application can be seen in the figures bellow:
+Additionally, the code is also accompanied by a \pkg{shiny} application that can be hosted locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation, to configure many parameters of the code visually and experiment with the results. It also allows the user to either use the PHAT0 data, or to upload its own data files (the expected format can be found at the application's help tab). A screenshot of this application can be seen in the next figure.
 
 \if{html}{\figure{CosmoPhotoz-Shiny.jpg}{CosmoPhotoz-Shiny-Plots}}
 \if{latex}{\figure{CosmoPhotoz-Shiny.pdf}{options: width=5.3in}}
 
-To run the \pkg{shiny} graphical interface locally, it is sufficient to call: 
+To run the graphical interface locally, it is sufficient to call: 
 
 \code{runApp(paste(find.package("CosmoPhotoz"),"/glmPhotoZ-2/",sep=""))}
 
-A short tutorial on how to use the package can be found at: 
+Finally, a short tutorial on how to use the package can be found at: 
 
 --------------- INCLUDE THE LINK HERE -----------------
 
 }
 \author{
-Rafael S. de Souza, Alberto Krone-Martins
+Rafael S. de Souza, Alberto Krone-Martins, Jonathan Elliott
 
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
 }

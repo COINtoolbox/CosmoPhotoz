@@ -1,8 +1,11 @@
 
- This is a shiny application to run the photometric redshift estimation code.
+ Shiny CosmoPhotoz application
 
+ This is a shiny application to run the photometric redshift estimation code.
  
  To run the application locally in your own machine, you just need to do:
 
  library(shiny)
-runApp(paste(find.package("CosmoPhotoz"),"/glmPhotoZ/",sep=""))
+runApp(paste(find.package("CosmoPhotoz"),"/glmPhotoZ-2/",sep=""))
+
+ 

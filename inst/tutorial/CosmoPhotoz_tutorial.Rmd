@@ -125,6 +125,5 @@ plotDiagPhotoZ(photoz, specz, type = "box")
 
 
 ```{r, echo=FALSE}
-shinyAppDir(
-  "/Users/rafael/Dropbox/artigos/Meusartigos/IAA-WGC/Github/CosmoR/CosmoPhotoz/inst/glmPhotoZ/")
+shinyAppDir("paste(find.package("CosmoPhotoz"),"/glmPhotoZ-2/",sep=""))
 ```

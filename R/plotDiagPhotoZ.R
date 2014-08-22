@@ -39,7 +39,7 @@
 #' #plotDiagPhotoZ(ppo_ph, ppo, type="errorviolins")
 #' #plotDiagPhotoZ(ppo_ph, ppo, type="box")
 #' 
-#' @usage plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"), npoints)
+#' @usage plotDiagPhotoZ(photoz, specz, type, npoints)
 #' 
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 

@@ -3,7 +3,7 @@
 \alias{plotDiagPhotoZ}
 \title{Plot diagnostics for photo z estimations}
 \usage{
-plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"), npoints)
+plotDiagPhotoZ(photoz, specz, type, npoints)
 }
 \arguments{
 \item{photoz}{vector containing photoz data}
