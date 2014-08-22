@@ -25,6 +25,55 @@ class PhotoSample(object):
       2. PCA preferences
       3. GLM preferences
       4. Plotting aesthetics
+
+    Instance variables:
+    -------------------
+
+    logger             - logger
+
+    filename_train     - user filename for fitting 
+    filename_test      - user filename for prediction
+    filename           - user filename
+
+
+    family_name        - GLM family
+    link               - GLM link
+    formula            - GLM formula
+
+    test_size          - size of the training sample
+    num_components     - number of PCA components
+    cross_validate     - defines if redshift predictions should be made
+
+    lims               - axes limits (should be obselete)
+    color_palette      - color palette passed to seaborn
+    reduce_size        - this defines how many objects to use in plotting
+    fontsize           - fontsize used for axes labels
+    
+    Testing            - purely for test purposes
+    
+
+    Method attributes
+    -----------------
+    PCA_data_frame     - DataFrame object from PCA fitting
+    data_frame_train   - DataFrame object with PCA for training
+    data_frame_test    - DataFrame object with PCA for predictions/cross validation
+    
+    deltas             - absolute different of measured to predicted
+    median             - median of deltas
+    std                - standard deviation of deltas
+    measured           - measured redshifts
+    predicted          - predicted redshifts from GLM
+    num_mega_outliers  - number of outliers
+    average            - average of deltas
+    rms                - root mean squares of deltas
+    rms_outliers       - root mean squares of deltas without outliers
+    bias_outliers      - mean of the deltas without outliers
+    catastrophic_error - fraction of outliers
+
+    kde_1d_ax          - seaborn axes object for KDE 1D plot
+    kde_2d_ax          - seaborn axes object for KDE 2D plot
+    kde_ax             - seaborn axes object for violin plot
+
     """ 
 
     # Setup the logger to the command line
