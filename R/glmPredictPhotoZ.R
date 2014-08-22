@@ -1,4 +1,4 @@
-#  R package GRAD file R/glmPredictPhotoZ.R
+#  R package CosmoPhotoz file R/glmPredictPhotoZ.R
 #  Copyright (C) 2014  COIN
 #
 #This program is free software: you can redistribute it and/or modify

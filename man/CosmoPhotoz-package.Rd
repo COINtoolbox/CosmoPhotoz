@@ -30,12 +30,18 @@ The package includes a plotting function to enable the production of diagnostic 
 \if{html}{\figure{merged-Diag-Plots.jpg}{merged-Diag-Plots}}
 \if{latex}{\figure{merged-Diag-Plots.pdf}{options: width=5.3in}}
 
-Additionally, the code is also accompanied by a Shiny application that can be hosted locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation and to configure many parameters of the code.
+Additionally, the code is also accompanied by a \pkg{shiny} application that can be hosted locally or deployed by the user at a webserver. This application allows the user to run the photometric redshift estimation and to configure many parameters of the code visually and experiment with the results. A screenshot of this application can be seen in the figures bellow:
+
+\if{html}{\figure{CosmoPhotoz-Shiny.jpg}{CosmoPhotoz-Shiny-Plots}}
+\if{latex}{\figure{CosmoPhotoz-Shiny.pdf}{options: width=5.3in}}
+
+To run the \pkg{shiny} graphical interface locally, it is sufficient to call: 
+
+\code{runApp(paste(find.package("CosmoPhotoz"),"/glmPhotoZ-2/",sep=""))}
 
 A short tutorial on how to use the package can be found at: 
 
-ASDFASFASDFASDFADSFASDF
-
+--------------- INCLUDE THE LINK HERE -----------------
 
 }
 \author{
