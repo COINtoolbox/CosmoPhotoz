@@ -5,25 +5,6 @@ Homepage: `GitHub Repository <https://github.com/COINtoolbox/CosmoPhotoz/tree/ma
 
 `CosmoPhotoz` is a package that determines photometric redshifts from galaxies utilising their magnitudes. The method utilises Generalized Linear Models which reproduce the physical aspects of the output distribution. The rest of the methodology and testing of the technique is described in the associated Astronomy and Computing publication that can be accessed at [link].
 
-.. code-block:: python
-
-    from CosmoPhotoz.photoz import PhotoSample
-    import numpy as np
-
-    train_size_arr = np.arange(0,10000,500)
-
-    catastrophic_error = []
-    UserCataloge = PhotoSample(filename="CATALOGUE.csv")
-    UserCatalogue.do_PCA()
-
-    for train_size in range(len(train_size_arr)):
-      UserCatalogue.num_components = train_size[i]
-      UserCatalogue.split_sample(random=True)
-      UserCatalogue.do_GLM()
-      catastrophic_error.append(UserCatalogue.catastrophic_error)        
-  
-    min_indx = numpy.array(catastrophic_error) < 0.01
-    optimimum_train_size = train_size[min_indx]
 
 Features
 --------
