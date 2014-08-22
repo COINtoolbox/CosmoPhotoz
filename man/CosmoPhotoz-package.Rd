@@ -20,7 +20,7 @@ Date: \tab 2014-08-22\cr
 License: \tab GPL (>= 3)\cr
 }
 
-The CosmoPhotoz package aims to provide a user-friendly interface to enable the estimation
+The CosmoPhotoz package aims to provide an user-friendly interface to enable the estimation
 of photometric redshifts. The present version employs Generalized Linear Models and the
 user can adopt either Gamma or Inverse Gaussian families of links and apply either a 
 frequentist or a bayesian perspective at the fitting step.
