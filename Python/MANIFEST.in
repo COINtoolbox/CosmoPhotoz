@@ -1,0 +1,4 @@
+include README.rst
+include README.md
+include CHANGES.md
+include data/2slaq_small.csv
