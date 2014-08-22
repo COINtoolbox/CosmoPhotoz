@@ -9,11 +9,11 @@
 \describe{
 
 \item{\code{redshift}}{The redshift of the galaxy.}
-\item{\code{up}}{The magnitude of the galaxy in the up band.}
-\item{\code{gp}}{The magnitude of the galaxy in the gp band.}
-\item{\code{rp}}{The magnitude of the galaxy in the rp band.}
-\item{\code{ip}}{The magnitude of the galaxy in the ip band.}
-\item{\code{zp}}{The magnitude of the galaxy in the zp band.}
+\item{\code{u}}{The magnitude of the galaxy in the u band.}
+\item{\code{g}}{The magnitude of the galaxy in the g band.}
+\item{\code{r}}{The magnitude of the galaxy in the r band.}
+\item{\code{i}}{The magnitude of the galaxy in the i band.}
+\item{\code{z}}{The magnitude of the galaxy in the z band.}
 \item{\code{Y}}{The magnitude of the galaxy in the Y band.}
 \item{\code{J}}{The magnitude of the galaxy in the J band.}
 \item{\code{H}}{The magnitude of the galaxy in the H band.}
@@ -28,7 +28,7 @@ Hildebrandt H., Arnouts S., Capak P., Moustakas L. A., Wolf C., Abdalla
 }
 \description{
 The CosmoPhotoz package includes the dataset \code{PHAT0test}, containing photometric
-data in the astronomical photometric bands up, gp, rp, ip, zp, Y, J, H, K, IRAC_1, IRAC_2
+data in the astronomical photometric bands u, g, r, i, z, Y, J, H, K, IRAC_1, IRAC_2
 and the redshift, for 161042 galaxies. The original PHAT0 dataset, containing 169520 was
 split in two (\code{\link{PHAT0train}} and \code{\link{PHAT0test}}).
 }
