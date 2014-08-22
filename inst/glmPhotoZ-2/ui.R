@@ -1,4 +1,5 @@
 library(shiny)
+library(markdown)
 
 # Define the user interface
 shinyUI(pageWithSidebar(

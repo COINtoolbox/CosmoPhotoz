@@ -3,14 +3,16 @@
 \alias{plotDiagPhotoZ}
 \title{Plot diagnostics for photo z estimations}
 \usage{
-plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"))
+plotDiagPhotoZ(photoz, specz, type=c("errordist", "predobs", "errorviolins", "box"), npoints)
 }
 \arguments{
 \item{photoz}{vector containing photoz data}
 
 \item{specz}{vector containing spectroscopic redshift data}
 
-\item{type}{a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}.}
+\item{type}{a string with one of the following values: \code{errordist}, \code{predobs}, \code{errorviolins} or \code{box}}
+
+\item{npoints}{an integer indicating how many points should be used to create the \code{predobs} plot (if 0, all points will be used)}
 }
 \value{
 ggplot object
