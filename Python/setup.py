@@ -65,7 +65,9 @@ setup(
     description=photoz.__doc__,
     long_description=long_description,
     packages=['CosmoPhotoz'],
-    package_dir = {'CosmoPhotoz': 'CosmoPhotoz'},
+    package_dir = {'CosmoPhotoz': 'CosmoPhotoz', 'data': 'CosmoPhotoz/data'},
+    package_data = {'CosmoPhotoz/data': 'PHAT0.csv.bz2'},
+    include_package_data = True,
     scripts=['CosmoPhotoz/run_glm.py'],
     platforms='any',
     classifiers = [

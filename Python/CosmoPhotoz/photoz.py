@@ -18,7 +18,9 @@ import time, argparse, logging, sys
 
 class PhotoSample(object):
 
-  def __init__(self, filename_train=False, filename_test=False, filename=False, family="Gamma", link=False, Testing=False):
+  def __init__(self, filename_train=False, filename_test=False, \
+               filename=False, family="Gamma", link=False, \
+               Testing=False):
 
     """
     Constructor for the photometric sample class.
@@ -123,7 +125,9 @@ class PhotoSample(object):
 
     # This is for more test purposes
     if self.filename:
+
       self.data_frame = self.load_data_frame(filename)
+
       self.logger.info("You gave a complete file, separating training sets")
       self.logger.info("You gave the dataset: {0}".format(filename))
       self.cross_validate = True
@@ -144,7 +148,7 @@ class PhotoSample(object):
       # Join the training and testing into a single file.
       # This is required for the PCA semi-supervised analysis
       self.data_frame = self.data_frame_train.copy()
-      self.data_frame = self.data_frame.append(self.data_frame_test)
+      self.data_frame = self.data_frame.append(self.data_frame_test)   
 
     else:
       self.logger.warning("You must give a training and test set or a complete file.")
@@ -155,7 +159,13 @@ class PhotoSample(object):
     """Loads the file into a pandas DataFrame. Returns this to the user."""
 
     try:
-      data_frame = pd.read_csv(filename, encoding="utf-8")
+      if filename == "PHAT0":
+        import os
+        phat = os.path.join(os.path.dirname(__file__), 'data', 'PHAT0.csv.bz2')
+        data_frame = pd.read_csv(phat, compression="bz2", encoding="utf-8")
+
+      else:
+        data_frame = pd.read_csv(filename, encoding="utf-8")
 
       self.data_frame_header = [i for i in data_frame.columns if i not in ["redshift", "specObjID"]]
 
@@ -182,11 +192,11 @@ class PhotoSample(object):
     from sklearn.decomposition import PCA
 
     # Number of components
-    if not self.num_components:
-      self.num_components = len([i for i in self.data_frame.columns if i != "redshift"])
+    # if not self.num_components:
+    #   self.num_components = len([i for i in self.data_frame.columns if i != "redshift"])
 
-    self.logger.info("Carrying out Principle Component Analysis ({0} components)".format(self.num_components))
-    pca = PCA(self.num_components)
+    self.logger.info("Carrying out Principle Component Analysis")
+    pca = PCA()
 
     pca.fit(self.data_frame[self.data_frame_header])
 
@@ -336,6 +346,7 @@ class PhotoSample(object):
     else:
       self.measured = np.array(self.data_frame_train["redshift"].values)
       self.predicted = results.predict(self.data_frame_train)
+      self.fitted = results.predict(self.data_frame_test)
 
     ## Outliers
     ## (z_phot - z_spec)/(1+z_spec)
@@ -377,7 +388,11 @@ class PhotoSample(object):
     """
     If the user gave a second file to make a prediction it writes the fit to a file.
     """
-    self.data_frame_test.to_csv("photoz_fitted.csv")
+
+    out_file = "glmPhotoZresults.csv"
+    self.logger.info("Writing to file: {0}".format(out_file))
+    df = pd.DataFrame({"redshift": self.fitted})
+    df.to_csv(out_file, index=False)
 
   def make_1D_KDE(self):
 
@@ -556,11 +571,11 @@ class PhotoSample(object):
     self.split_sample(random=random)
     self.do_GLM()
 
-    self.make_1D_KDE()
-    self.make_2D_KDE()
-    self.make_violin()
+    # self.make_1D_KDE()
+    # self.make_2D_KDE()
+    # self.make_violin()
 
-    if self.cross_validate:
+    if not self.cross_validate:
       self.write_to_file()
 
 def main():
