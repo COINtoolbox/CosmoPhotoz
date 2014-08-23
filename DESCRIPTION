@@ -6,8 +6,7 @@ Date: 2014-08-20
 Author: Rafael S. de Souza, Alberto Krone-Martins, Jonathan Elliott, Joseph
     Hilbe
 Maintainer: Rafael S. de Souza <rafael.2706@gmail.com>
-Description: This package provides
-    an user-friendly interfaces to perform fast and reliable photometric
+Description:  User-friendly interfaces to perform fast and reliable photometric
     redshift estimation. The code makes use of generalized linear models and
     can adopt gamma or inverse gaussian families, either from a frequentist or
     a Bayesian perspective. The code additionally provides a Shiny application

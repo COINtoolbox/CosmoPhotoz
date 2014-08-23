@@ -13,11 +13,11 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-#' @title Photo-z estimation from a training dataset and a test dataset
+#' @title Photometric redshift  estimation from a training dataset and a test dataset
 #'
 #' @description \code{CosmoPhotoZestimator} returns photometric redshift estimated from photometric 
 #' data and a training dataset with photometry and spectroscopy. The estimation is 
-#' based on GLMs (see \code{\link{glmTrainPhotoZ}} and \code{\link{glmPredictPhotoZ}}).
+#' based on generalized linear models (see \code{\link{glmTrainPhotoZ}} and \code{\link{glmPredictPhotoZ}}).
 #' 
 #' @import shiny
 #' @param trainData vector containing spectroscopic redshift data and photometry (at least one column shall be called redshift)
