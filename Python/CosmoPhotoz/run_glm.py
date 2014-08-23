@@ -36,7 +36,7 @@ __email__ = "jonnynelliott@googlemail.com"
 __status__ = "Prototype"
 __license__ = "GPL"
 
-from CosmoPhotoz.photoz import PhotoSample
+from photoz import PhotoSample
 import sys
 import argparse
 
