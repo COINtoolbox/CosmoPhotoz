@@ -19,6 +19,10 @@ PCA projections for each matrix
 \code{computeCombPCA} computes combined PCA projections of
 the training and test samples.
 }
+\details{
+The program is a simple alteration of PCAgrid() that computes a desired number of robust
+ principal components using the grid search algorithm in the plane.
+}
 \examples{
 #Multivariate data with outliers
 library(mvtnorm)
