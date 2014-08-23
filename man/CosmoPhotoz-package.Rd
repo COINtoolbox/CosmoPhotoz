@@ -41,7 +41,7 @@ To run the graphical interface locally, it is sufficient to call:
 
 Finally, a short tutorial on how to use the package can be found at: 
 
---------------- INCLUDE THE LINK HERE -----------------
+--------------- http://rafaelsdesouza.github.io/CosmoPhotoz/ -----------------
 
 }
 \author{
