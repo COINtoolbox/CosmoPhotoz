@@ -54,8 +54,13 @@ Or import the library into python.
     from CosmoPhotoz.photoz import PhotoSample # import the library
     import numpy as np
 
+    import os
+    import CosmoPhotoz.photoz as phz
+
     # Instantiate the class
-    UserCatalogue = PhotoSample(filename="/home/user/workspace/wgcs/lisbon_2014/photoz/data/2slaq_small.csv", family="Gamma", link="log")
+
+    TWOSLAQ = "{0}/data/2slaq_small.csv".format(os.path.dirname(phz.__file__))
+    UserCatalogue = PhotoSample(filename=TWOSLAQ, family="Gamma", link="log")
 
     # Make a training size array to loop through
     train_size_arr = np.arange(0,10000,500) 
