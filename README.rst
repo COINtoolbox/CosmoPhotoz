@@ -5,9 +5,9 @@ CosmoPhotoz - GLM PhotoZ estimation
 
 The software is available on three platforms:
 
- * R
- * R/Shiny (Webapp)
- * Python
+* R
+* R/Shiny (Webapp)
+* Python
 
 .. _pattern: http://www.clips.ua.ac.be/pattern
 .. _NLTK: http://nltk.org/
