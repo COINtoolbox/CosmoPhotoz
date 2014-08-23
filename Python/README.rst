@@ -23,7 +23,7 @@ The package can be installed using the PyPI and pip.
 
 ::
 
-    $ pip install -U cosmophotoz
+    $ pip install -U CosmoPhotoz
 
 Or if the tarball or repository is downloaded, distutils can be
 
@@ -53,7 +53,8 @@ Or import the library into python.
 
     for train_size in range(len(train_size_arr)):
         UserCatalogue.num_components = train_size[i]
-        UserCatalogue.split_sample(random=True) UserCatalogue.do_GLM()
+        UserCatalogue.split_sample(random=True)
+        UserCatalogue.do_GLM()
 
     catastrophic_error.append(UserCatalogue.catastrophic_error)
 
