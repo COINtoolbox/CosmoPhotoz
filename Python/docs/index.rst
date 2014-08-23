@@ -10,6 +10,11 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+  
+   Install
+
+.. toctree::
+   :maxdepth: 2
 
    Intro
 
