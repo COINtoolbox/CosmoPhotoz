@@ -25,7 +25,7 @@ a dataset that has both magnitudes and redshifts for each object.
 .. code:: python
 
     %matplotlib inline
-    from photoz import PhotoSample
+    from CosmoPhotoz.photoz import PhotoSample
 
 .. raw:: html
 
