@@ -335,7 +335,8 @@ class PhotoSample(object):
       self.predicted = results.predict(self.data_frame_test)
     else:
       self.measured = np.array(self.data_frame_train["redshift"].values)
-      self.predicted = results.predict(self.data_frame_train)
+      self.predicted = results.predicted(self.data_frame_train)
+      self.fitted = results.predict(self.data_frame_test)
 
     ## Outliers
     ## (z_phot - z_spec)/(1+z_spec)
@@ -377,7 +378,8 @@ class PhotoSample(object):
     """
     If the user gave a second file to make a prediction it writes the fit to a file.
     """
-    self.data_frame_test.to_csv("photoz_fitted.csv")
+    df = pd.DataFrame({"redshift": self.fitted})
+    df.to_csv("photoz_fitted.csv")
 
   def make_1D_KDE(self):
 
