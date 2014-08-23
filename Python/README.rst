@@ -2,7 +2,7 @@ CosmoPhotoz - GLM PhotoZ estimation
 ====================================
 
 .. image:: https://readthedocs.org/projects/cosmophotoz/badge/?version=latest
-    :target: https://readthedocs.org/projects/cosmophotoz/
+    :target: http://cosmophotoz.readthedocs.org/en/latest/
     :alt: Latest version
 
 Homepage: `GitHub Repository <https://github.com/COINtoolbox/CosmoPhotoz/tree/master/Python>`_
