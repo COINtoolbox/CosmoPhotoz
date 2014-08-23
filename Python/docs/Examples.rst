@@ -6,6 +6,7 @@ Examples
    <h1>
    
 PHAT0
+-----
 
 .. raw:: html
 
@@ -98,6 +99,7 @@ Now run the PCA decomposition and GLM fitting
    <h1>
    
 Real Data
+---------
 
 .. raw:: html
 
