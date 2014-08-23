@@ -1,0 +1,137 @@
+---
+title: "Photometric Redshift with CosmoPhotoz"
+authors: Rafael S. de Souza, Jonny Elliot, Alberto Krone-Martins, Émille Ishida, Joseph
+  Hilbe
+output: html_document
+runtime: shiny
+---
+
+This is a short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
+
+
+
+Install from 
+
+```{r,results='hide',message=FALSE, cache=FALSE}
+install_github("CosmoR", username="RafaelSdeSouza", subdir="CosmoGLM")
+```
+
+ Required libraries
+```{r,results='hide',message=FALSE, cache=FALSE}
+require(CosmoPhotoz)
+require(ggplot2)
+
+```
+
+Load the PHAT0 data included in the package. Here we are using 5% of all dataset for training. 
+
+
+```{r}
+data(PHAT0train)
+
+data(PHAT0test)
+```
+
+
+
+
+```{r}
+PC_comb<-computeCombPCA(subset(PHAT0train,select=c(-redshift)),
+                       subset(PHAT0test,select=c(-redshift)))
+```
+
+Number of variance explained by each PC 
+```{r}
+PC_comb$PCsum
+```
+
+Add the redshift column to the PCA projections of the  Training sample
+
+```{r}
+Trainpc<-cbind(PC_comb$x,redshift=PHAT0train$redshift)
+
+```
+
+
+Store the PCA projections for the testing sample in the vector Testpc
+
+```{r, echo=FALSE}
+Testpc<-PC_comb$y
+```
+
+
+Train  the glm model using Gamma Family. 6 PCs explain 99.5% of data variance. In order to account for small variations in the shape, we include a polynomial term for the 2 first PCs (95% of data variance) 
+
+```{r}
+
+Fit<-glmTrainPhotoZ(Trainpc,formula=redshift~poly(Comp.1,2)*poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6,method="Bayesian",family="gamma")
+
+```
+
+
+
+Once we fit our GLM model, we can predict the redshift for the "photometric" sample
+ 
+```{r, echo=FALSE}
+
+photoz<-predict(Fit$glmfit,newdata = Testpc,type="response")
+
+```
+
+Store the redshift from the testing sample in the vector specz for comparison 
+
+```{r, echo=FALSE}
+specz<-PHAT0test$redshift
+```
+
+
+Compute basic diagnostic statistics 
+
+
+
+```{r, echo=FALSE}
+computeDiagPhotoZ(photoz, specz)
+```
+
+
+
+Create basic diagnostic   plots
+
+Kernel density distribution of the full scatter 
+ $(specz-photoz)/(1+specz)$
+ 
+```{r,fig.width=8, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "errordist")
+
+```
+
+Predicted vs Actuall values
+Select 15,000 points to show
+```{r}
+datashow<-sample(length(photoz),15000)
+```
+
+
+```{r,fig.width=8, fig.height=9}
+plotDiagPhotoZ(photoz[datashow], specz[datashow], type = "predobs")+coord_cartesian(xlim =c(0,1.5), ylim = c(0,1.5))
+```
+
+
+Scatter distribution as a function of redshift, violin plot
+
+```{r,fig.width=12, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "errorviolins")
+```
+
+
+
+Scatter distribution as a function of redshift, box plot
+
+```{r,fig.width=12, fig.height=9}
+plotDiagPhotoZ(photoz, specz, type = "box")
+```
+
+
+```{r, echo=FALSE}
+shinyAppDir("paste(find.package("CosmoPhotoz"),"/glmPhotoZ-2/",sep=""))
+```
