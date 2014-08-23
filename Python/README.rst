@@ -54,11 +54,14 @@ Or import the library into python.
     from CosmoPhotoz.photoz import PhotoSample # import the library
     import numpy as np
 
+    import os
+    import CosmoPhotoz.photoz as phz
+
     # Instantiate the class
-    UserCatalogue = PhotoSample(filename="/home/user/workspace/wgcs/lisbon_2014/photoz/data/2slaq_small.csv", family="Gamma", link="log")
+    UserCatalogue = PhotoSample(filename="PHAT0", family="Gamma", link="log")
 
     # Make a training size array to loop through
-    train_size_arr = np.arange(0,10000,500)
+    train_size_arr = np.arange(500,10000,500)
     catastrophic_error = []
 
     # Select your number of components
@@ -69,11 +72,11 @@ Or import the library into python.
         UserCatalogue.test_size = train_size_arr[i]
         UserCatalogue.split_sample(random=True)
         UserCatalogue.do_GLM()
+        catastrophic_error.append(UserCatalogue.catastrophic_error)
 
-    catastrophic_error.append(UserCatalogue.catastrophic_error)
-
-    min_indx = np.array(catastrophic_error) < 0.01
-    optimimum_train_size = train_size_arr[min_indx]
+    min_indx = np.array(catastrophic_error) < 5.937
+    optimum_train_size = train_size_arr[min_indx]
+    print optimum_train_size
 
 
 See more examples within the `Documentation`_.
@@ -84,7 +87,7 @@ See more examples within the `Documentation`_.
 Documentation
 -------------
 
--  The library documentation can be accessed at `Read the Docs <https://readthedocs.org/projects/cosmophotoz/badge/?version=latest>`_
+-  The library documentation can be accessed at `Read the Docs <http://cosmophotoz.readthedocs.org/en/latest/>`_
 
 -  The git repository can be accessed at `GitHub <http://github.com/COINtoolbox/COSMOPhotoz>`_
 
