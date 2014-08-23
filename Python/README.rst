@@ -69,11 +69,11 @@ See more examples within the `Documentation`_.
 Documentation
 -------------
 
--  The library documentation can be accessed at `http://jonnybazookatone.github.io/CosmoPy/ <http://jonnybazookatone.github.io/CosmoPy/>`_
+-  The library documentation can be accessed at `Read the Docs <https://readthedocs.org/projects/cosmophotoz/badge/?version=latest>`_
 
--  The github repository can be accessed at `http://github.com/COINtoolbox/COSMOPhotoz/CosmoPy <http://github.com/COINtoolbox/COSMOPhotoz/CosmoPy>`_
+-  The git repository can be accessed at `GitHub <http://github.com/COINtoolbox/COSMOPhotoz/CosmoPy>`_
 
--  The PyPI package page can be accessed at `https://pypi.python.org/pypi?name=CosmoPhotoz&version=1.0 <https://pypi.python.org/pypi?name=CosmoPhotoz&version=1.0>`_
+-  The PyPI package page can be accessed at `PyPI <https://pypi.python.org/pypi?name=CosmoPhotoz&version=1.0>`_
 
 Requirements
 ------------

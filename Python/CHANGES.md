@@ -1,4 +1,4 @@
 # Changelog
-1.0 (2014-08-22)
+v 0.1 (2014-08-22)
  
- * Stable release
+ * Stable release 1.0
