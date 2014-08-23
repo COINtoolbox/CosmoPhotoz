@@ -5,6 +5,10 @@ CosmoPhotoz - GLM PhotoZ estimation
     :target: http://cosmophotoz.readthedocs.org/en/latest/
     :alt: Latest version
 
+.. image:: https://badge.waffle.io/COINtoolbox/CosmoPhotoz.svg?label=ready&title=Ready
+    :target: https://waffle.io/COINtoolbox/CosmoPhotoz
+    :alt: 'Stories in Ready'
+
 Homepage: `GitHub Repository <https://github.com/COINtoolbox/CosmoPhotoz/tree/master/Python>`_
 
 `CosmoPhotoz` is a package that determines photometric redshifts from galaxies utilising their magnitudes. The method utilises Generalized Linear Models which reproduce the physical aspects of the output distribution. The rest of the methodology and testing of the technique is described in the associated Astronomy and Computing publication (link TBC).
