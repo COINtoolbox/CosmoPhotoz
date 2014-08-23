@@ -75,7 +75,7 @@ Now run the PCA decomposition and GLM fitting
     PHAT0.run_full()
 
 
-.. image:: imgs/GLM%20Photo-z_7_0.png
+.. image:: imgs/GLMPhoto-z_7_0.png
 
 
 
@@ -85,11 +85,11 @@ Now run the PCA decomposition and GLM fitting
 
 
 
-.. image:: imgs/GLM%20Photo-z_7_2.png
+.. image:: imgs/GLMPhoto-z_7_2.png
 
 
 
-.. image:: imgs/GLM%20Photo-z_7_3.png
+.. image:: imgs/GLMPhoto-z_7_3.png
 
 
 
@@ -233,7 +233,7 @@ Applying the GLM to the SDSS
     SDSS.make_1D_KDE()
 
 
-.. image:: imgs/GLM%20Photo-z_15_0.png
+.. image:: imgs/GLMPhoto-z_15_0.png
 
 
 
@@ -260,7 +260,7 @@ Applying the GLM to the SDSS
 
 
 
-.. image:: imgs/GLM%20Photo-z_17_1.png
+.. image:: imgs/GLMPhoto-z_17_1.png
 
 
 
@@ -281,7 +281,7 @@ Applying the GLM to the SDSS
     SDSS.make_violin()
 
 
-.. image:: imgs/GLM%20Photo-z_19_0.png
+.. image:: imgs/GLMPhoto-z_19_0.png
 
 
 
@@ -346,6 +346,6 @@ way, in comparison to functional forms.
     plt.show()
 
 
-.. image:: imgs/GLM%20Photo-z_21_0.png
+.. image:: imgs/GLMPhoto-z_21_0.png
 
 
