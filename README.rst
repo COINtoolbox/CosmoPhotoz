@@ -1,3 +1,6 @@
+.. image:: https://badge.waffle.io/COINtoolbox/CosmoPhotoz.png?label=ready&title=Ready 
+ :target: https://waffle.io/COINtoolbox/CosmoPhotoz
+ :alt: 'Stories in Ready'
 CosmoPhotoz - GLM PhotoZ estimation
 ====================================
 
