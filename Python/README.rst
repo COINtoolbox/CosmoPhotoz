@@ -71,9 +71,9 @@ Documentation
 
 -  The library documentation can be accessed at `Read the Docs <https://readthedocs.org/projects/cosmophotoz/badge/?version=latest>`_
 
--  The git repository can be accessed at `GitHub <http://github.com/COINtoolbox/COSMOPhotoz/CosmoPy>`_
+-  The git repository can be accessed at `GitHub <http://github.com/COINtoolbox/COSMOPhotoz>`_
 
--  The PyPI package page can be accessed at `PyPI <https://pypi.python.org/pypi?name=CosmoPhotoz&version=1.0>`_
+-  The PyPI package page can be accessed at `PyPI <https://pypi.python.org/pypi?name=CosmoPhotoz&version=0.1>`_
 
 Requirements
 ------------
