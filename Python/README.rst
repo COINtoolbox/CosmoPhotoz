@@ -51,21 +51,29 @@ Or import the library into python.
 
 .. code-block:: python  
 
+    from CosmoPhotoz.photoz import PhotoSample # import the library
     import numpy as np
 
-    train_size_arr = np.arange(0,10000,500) catastrophic_error = []
+    # Instantiate the class
+    UserCatalogue = PhotoSample(filename="/home/user/workspace/wgcs/lisbon_2014/photoz/data/2slaq_small.csv", family="Gamma", link="log")
 
-    UserCatalogue.do_PCA()
+    # Make a training size array to loop through
+    train_size_arr = np.arange(0,10000,500)
+    catastrophic_error = []
 
-    for train_size in range(len(train_size_arr)):
-        UserCatalogue.num_components = train_size[i]
+    # Select your number of components
+    UserCatalogue.num_components = 4
+
+    for i in range(len(train_size_arr)):
+        UserCatalogue.do_PCA()
+        UserCatalogue.test_size = train_size_arr[i]
         UserCatalogue.split_sample(random=True)
         UserCatalogue.do_GLM()
 
     catastrophic_error.append(UserCatalogue.catastrophic_error)
 
-    min_indx = numpy.array(catastrophic_error) < 0.01
-    optimimum_train_size = train_size[min_indx]
+    min_indx = np.array(catastrophic_error) < 0.01
+    optimimum_train_size = train_size_arr[min_indx]
 
 
 See more examples within the `Documentation`_.
