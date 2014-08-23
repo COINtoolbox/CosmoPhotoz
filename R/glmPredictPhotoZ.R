@@ -14,13 +14,13 @@
 #  http://www.r-project.org/Licenses/
 #
 
-#' @title Predict photometric redshifts using a given a GLM fit object
+#' @title Predict photometric redshifts using a given a glm fit object
 #'
 #' @description \code{glmPredictPhotoZ} computes a list of simple summary 
 #' statistics for the photometric redshift estimation.
 #' 
 #' @param data a data.frame containing the data one wished to compute the redshift
-#' @param train a trainned GLM object containing the fit of the model
+#' @param train a trained glm object containing the fit of the model
 #' @return list containing the results of the redshift estimation
 #' @examples
 #' \dontrun{
@@ -60,7 +60,6 @@ glmPredictPhotoZ <- function(data, train){
  	if( ! is.data.frame(data) ) {
  		stop("Error in glmPredictPhotoZ :: data is not a data frame, and the code expects a data frame.")
  	}
- 	###### WE NEED TO CHECK IF THE train is a GLM object :: we need to verify if there is a simple way to perform this checking
  	
 	# Now for the real work
 	#Photoz<-predict(train,newdata=subset(data,select=-c(redshift)),type="response",se.fit = TRUE)
@@ -68,7 +67,7 @@ glmPredictPhotoZ <- function(data, train){
 	photoz <- photozObj$fit
 	err_photoz <- photozObj$se.fit
 
-	# That's all folks!
+	
 	return(list(photoz=photoz, err_photoz=err_photoz))
 }
 

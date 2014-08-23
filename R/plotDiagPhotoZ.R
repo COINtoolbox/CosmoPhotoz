@@ -13,7 +13,7 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-#' @title Plot diagnostics for photo z estimations
+#' @title Plot diagnostics for photometric redshift  estimations
 #'
 #' @description \code{plotDiagPhotoZ} returns diagnostic plots from the results of 
 #' photometric redshifts. Different types of plots are available: a density plot of the 

@@ -14,7 +14,7 @@
 #  http://www.r-project.org/Licenses/
 #
 
-#' @title Fit a GLM for photometric redshift estimation
+#' @title Fit a glm for photometric redshift estimation
 #'
 #' @description \code{glmTrainPhotoZ} trains a generalized linear model for 
 #' photometric redshift estimation.
@@ -22,9 +22,9 @@
 #' @import arm COUNT
 #' @param x a data.frame containing the data to train the model
 #' @param formula an object of class "formula" to be adopted
-#' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.
-#' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).
-#' @return a trainned GLM object containing the fit of the model
+#' @param method a string containing the chosen glm method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.
+#' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a string with a  description of the error distribution and link function to be used in the model).
+#' @return a trained glm object containing the fit of the model
 #' @examples
 #' \dontrun{
 #' # Load the data
@@ -43,7 +43,7 @@
 #'            poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6, 
 #'            method="Bayesian", family="gamma")
 #' 
-#' # Perform the photo-z estimation
+#' # Perform the photometric redshift estimation
 #' photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
 #' specz <- PHAT0test$redshift
 #' 
@@ -54,7 +54,8 @@
 #' @usage glmTrainPhotoZ(x, formula, method, family)
 #' 
 #' @author Rafael S. de Souza, Alberto Krone-Martins
-#' 
+#' @details The program is a simple alteration of glm() and bayesglm().
+#'          The new arguments here are: Frequentist, Bayesian.
 #' @keywords utilities
 #' @export
 glmTrainPhotoZ <- function(x, formula=NULL, method=c("Frequentist","Bayesian"), family=c("gamma","inverse.gaussian")) {
@@ -98,7 +99,7 @@ glmTrainPhotoZ <- function(x, formula=NULL, method=c("Frequentist","Bayesian"), 
   }
 
   # That's it folks!
-  # return(summary(GLM_data))
+  
   return(list(glmfit = GLM_data, Summary = summary(GLM_data),
               AICn = modelfit(GLM_data)$AICn,
               BICqh = modelfit(GLM_data)$BICqh))  

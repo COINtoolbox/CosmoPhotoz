@@ -40,6 +40,8 @@
 #' @author Rafael S. de Souza, Alberto Krone-Martins
 #' 
 #' @keywords misc
+#' @details The program is a simple alteration of PCAgrid() that computes a desired number of robust
+#'  principal components using the grid search algorithm in the plane. 
 #' @export
 computeCombPCA <- function(x, y, robust=TRUE) {
 

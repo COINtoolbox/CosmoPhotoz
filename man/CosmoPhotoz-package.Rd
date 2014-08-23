@@ -3,12 +3,12 @@
 \alias{CosmoPhotoz}
 \docType{package}
 \title{
-Photometric redshift estimation based on Generalized Linear Models
+Photometric redshift estimation based on generalized linear models
 }
 \description{
 This package provides an user-friendly interfaces to perform fast and reliable photometric 
-redshift estimation. The code makes use of generalized linear models and can adopt Gamma or 
-Inverse Gaussian families, either from a frequentist or a bayesian perspective. The code
+redshift estimation. The code makes use of generalized linear models and can adopt gamma or 
+inverse gaussian families, either from a frequentist or a Bayesian perspective. The code
 additionally provides a Shiny application providing a simple user interface.
 }
 \details{
@@ -21,9 +21,9 @@ License: \tab GPL (>= 3)\cr
 }
 
 The CosmoPhotoz package aims to provide an user-friendly interface to enable the estimation
-of photometric redshifts. The present version employs Generalized Linear Models and the
-user can adopt either Gamma or Inverse Gaussian families of links and apply either a 
-frequentist or a bayesian perspective at the fitting step.
+of photometric redshifts. The present version employs generalized linear models and the
+user can adopt either gamma or inverse gaussian families of links and apply either a 
+frequentist or a Bayesian perspective at the fitting step.
 
 The package includes a plotting function to enable the production of diagnostic plots. Four examples of the visual diagnostics that are implemented can be seen in the figures bellow:
 

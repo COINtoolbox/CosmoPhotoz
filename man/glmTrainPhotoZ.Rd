@@ -12,7 +12,7 @@ glmTrainPhotoZ(x, formula, method, family)
 
 \item{method}{a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package  \code{arm}.}
 
-\item{family}{a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model).}
+\item{family}{a string containing \code{gamma} or \code{inverse.gaussian} (a string with a  description of the error distribution and link function to be used in the model).}
 }
 \value{
 a trainned GLM object containing the fit of the model
@@ -20,6 +20,10 @@ a trainned GLM object containing the fit of the model
 \description{
 \code{glmTrainPhotoZ} trains a generalized linear model for
 photometric redshift estimation.
+}
+\details{
+The program is a simple alteration of glm() and bayesglm() that uses an approximate EM algorithm to update the betas at each step using an augmented regression to represent the prior information.
+         The new arguments here are: Frequentist, Bayesian.
 }
 \examples{
 \dontrun{
@@ -39,7 +43,7 @@ Fit <- glmTrainPhotoZ(Trainpc, formula=redshift~poly(Comp.1,2)*
            poly(Comp.2,2)*Comp.3*Comp.4*Comp.5*Comp.6,
            method="Bayesian", family="gamma")
 
-# Perform the photo-z estimation
+# Perform the photometric redshift estimation
 photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
 specz <- PHAT0test$redshift
 
@@ -49,6 +53,11 @@ plotDiagPhotoZ(photoz, specz, "box")
 }
 \author{
 Rafael S. de Souza, Alberto Krone-Martins
+}
+\references{
+Andrew Gelman, Aleks Jakulin, Maria Grazia Pittau and Yu-Sung Su. (2009).
+“A Weakly Informative Default Prior Distribution For Logistic And Other Regression Models.”
+ The Annals of Applied Statistics 2 (4): 1360–1383.
 }
 \keyword{utilities}
 

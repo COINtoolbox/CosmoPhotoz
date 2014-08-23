@@ -30,7 +30,6 @@
 #' 
 #' @keywords datasets
 NULL
-
 #' @name PHAT0train
 #' @title PHAT0 train dataset
 #' @description The CosmoPhotoz package includes the dataset \code{PHAT0train}, containing photometric 
