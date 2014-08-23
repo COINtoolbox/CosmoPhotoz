@@ -571,9 +571,9 @@ class PhotoSample(object):
     self.split_sample(random=random)
     self.do_GLM()
 
-    # self.make_1D_KDE()
-    # self.make_2D_KDE()
-    # self.make_violin()
+    self.make_1D_KDE()
+    self.make_2D_KDE()
+    self.make_violin()
 
     if not self.cross_validate:
       self.write_to_file()
