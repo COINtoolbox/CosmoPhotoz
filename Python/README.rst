@@ -84,7 +84,7 @@ See more examples within the `Documentation`_.
 Documentation
 -------------
 
--  The library documentation can be accessed at `Read the Docs <https://readthedocs.org/projects/cosmophotoz/badge/?version=latest>`_
+-  The library documentation can be accessed at `Read the Docs <http://cosmophotoz.readthedocs.org/en/latest/>`_
 
 -  The git repository can be accessed at `GitHub <http://github.com/COINtoolbox/COSMOPhotoz>`_
 
