@@ -44,7 +44,7 @@ Run from the command line.
 
 :: 
 
-    $ run_glm.py --dataset sample.csv --num_components 3 --train_size 10000 --family Gamma --link log
+    $ run_glm.py --dataset sample.csv --num_components 3 --training_size 10000 --family Gamma --link log
 
 
 Or import the library into python.
