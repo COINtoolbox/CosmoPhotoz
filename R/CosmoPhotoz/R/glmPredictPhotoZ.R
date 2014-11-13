@@ -14,7 +14,7 @@
 #  http://www.r-project.org/Licenses/
 #
 
-#' @title Predict photometric redshifts using a given  glm fit object
+#' @title Predict photometric redshifts using a given glm fit object
 #'
 #' @description \code{glmPredictPhotoZ} computes a list of simple summary 
 #' statistics for the photometric redshift estimation.

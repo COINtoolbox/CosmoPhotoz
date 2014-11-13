@@ -6,7 +6,7 @@
 Photometric redshift estimation based on generalized linear models
 }
 \description{
-This package provides an user-friendly interfaces to perform fast and reliable photometric 
+An user-friendly interfaces to perform fast and reliable photometric 
 redshift estimation. The code makes use of generalized linear models and can adopt gamma or 
 inverse gaussian families, either from a frequentist or a Bayesian perspective. The code
 additionally provides a Shiny application providing a simple user interface.

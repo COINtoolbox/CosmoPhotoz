@@ -8,15 +8,7 @@ runtime: shiny
 
 This is a short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
 
-
-
-Install from 
-
-```{r,results='hide',message=FALSE, cache=FALSE}
-install_github("CosmoR", username="RafaelSdeSouza", subdir="CosmoGLM")
-```
-
- Required libraries
+# Required libraries
 ```{r,results='hide',message=FALSE, cache=FALSE}
 require(CosmoPhotoz)
 require(ggplot2)
