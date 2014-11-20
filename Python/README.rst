@@ -17,7 +17,7 @@ Homepage: `GitHub Repository <https://github.com/COINtoolbox/CosmoPhotoz/tree/ma
 Features
 --------
 
-- Principle Component Anylsis and decomposition of input photometric catalogue
+- Principle Component Analysis and decomposition of input photometric catalogue
 - Generalized Linear Model family and link choice
 - Seaborn publication quality plots
 
