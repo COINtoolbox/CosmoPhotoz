@@ -8,8 +8,14 @@ runtime: shiny
 
 This is a short tutorial explaining how to perform photometric redshift estimation using the CosmoPhotoz R package.
 
+
+
 # Required libraries
 ```{r,results='hide',message=FALSE, cache=FALSE}
+install.packages('devtools') ; library(devtools)   # needed for github interface
+install.packages('arm') ; library(arm)   # imports for CosmoPhotoz
+install.packages('COUNT') ; library(COUNT)
+install.packages('pcaPP') ; library(pcaPP)
 require(CosmoPhotoz)
 require(ggplot2)
 
@@ -125,5 +131,5 @@ plotDiagPhotoZ(photoz, specz, type = "box")
 
 
 ```{r, echo=FALSE}
-shinyAppDir("paste(find.package("CosmoPhotoz"),"/glmPhotoZ-2/",sep=""))
+runApp(paste(find.package("CosmoPhotoz"),"/CosmoPhotoz_shiny",sep=""))
 ```
