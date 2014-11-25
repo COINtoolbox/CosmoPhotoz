@@ -36,3 +36,28 @@ To run the photometric redshift estimate, the user must click in the "Run estima
 
 Four different types of plots are provided by the system. Note that the prediction versus observed density plot (at the Prediction tab) may take some moments to render or update. The user can choose to use less points, which are randomly selected from the results, to create this plot if in a hurry.
 
+### References
+
+#### Associated paper
+**The Overlooked Potential of Generalized Linear Models in Astronomy-II: Gamma regression and photometric redshifts**
+Elliott, J.; de Souza, R. S.; Krone-Martins, A.; Cameron, E.; Ishida, E. E. O.; Hilbe, J., 
+[arXiv:1409.7699](http://adsabs.harvard.edu/abs/2014arXiv1409.7699E)
+
+
+**CosmoPhotoz: Photometric redshift estimation using generalized linear models**
+##### R package 
+[http://CRAN.R-project.org/package=CosmoPhotoz](http://CRAN.R-project.org/package=CosmoPhotoz)
+Rafael S. de Souza, Alberto Krone-Martins, Jonathan Elliott and Joseph Hilbe (2014).
+
+##### Shiny package 
+[https://cosmostatisticsinitiative.shinyapps.io/CosmoPhotoz/](https://cosmostatisticsinitiative.shinyapps.io/CosmoPhotoz/)
+Alberto Krone-Martins; Rafael S. de Souza; Jonathan Elliott, Ishida, E. E. O.;  and Joseph Hilbe (2014).
+
+
+##### Python package
+[http://cosmophotoz.readthedocs.org/en/latest/index.html](http://cosmophotoz.readthedocs.org/en/latest/index.html)
+J. Elliott, R. S. de Souza, A. Krone-Martins
+
+
+
+

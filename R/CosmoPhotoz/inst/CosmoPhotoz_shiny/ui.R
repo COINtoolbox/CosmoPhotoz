@@ -15,14 +15,14 @@
 #
 library(shiny)
 library(markdown)
-
+library(shinyIncubator)
 # Define the user interface
-shinyUI(pageWithSidebar(
+shinyUI(fluidPage(theme = "bootstrapblue.css",
 
   # Application title
   headerPanel("CosmoPhotoz - GLM PhotoZ estimation"),
-
-  # Sidebar with controls
+  img(src='COIN.jpg',height = 95, width = 650,align="right"),
+# Sidebar with controls
   sidebarPanel(
     tags$head(tags$style(type="text/css", "
              #loadmessage {
@@ -43,12 +43,12 @@ shinyUI(pageWithSidebar(
                             tags$div("Calculating... you can get a coffee.", id="loadmessage")),
 
     h4("Data Input"),
-    checkboxInput('dataSourceFlag', 'Use PHAT0 data', TRUE),
+    div(checkboxInput('dataSourceFlag', 'Use PHAT0 data', TRUE),class="radio"),
     fileInput('file1', 'Data for training', accept=c('.dat', '.txt')),
     fileInput('file2', 'Data to estimate photoZ', accept=c('.dat', '.txt')),
 
     h4("Control and options"),
-    checkboxInput('useRobustPCA', 'Use robust PCA', FALSE),
+    div(checkboxInput('useRobustPCA', 'Use robust PCA', FALSE),class="radio"),
     numericInput("numberOfPcs", "Number of Principal Components:", value=4, min=1),
     numericInput("numberOfPoints", "Points in Pred vs. Obs. plot: ", 5000, min=0),
     helpText("Note: if 0, all points will be used."),
@@ -69,12 +69,14 @@ shinyUI(pageWithSidebar(
   # Show output plot
   mainPanel(
     tabsetPanel(
+      tabPanel("Introduction", includeMarkdown("help.md")),
       tabPanel("Error Distribution", plotOutput("errorDistPlot")), 
       tabPanel("Violins", plotOutput("violins")),
       tabPanel("Box", plotOutput("box")),
       tabPanel("Prediction", plotOutput("predictObs")), 
       tabPanel("Diagnostics", verbatimTextOutput("diagnostics")),
-      tabPanel("Help", includeMarkdown("help.md"))
+      tabPanel("Copyright", includeMarkdown("Copyright.md")),
+      tabPanel("COIN", includeMarkdown("COIN.md"))
     )
   )
 ))
