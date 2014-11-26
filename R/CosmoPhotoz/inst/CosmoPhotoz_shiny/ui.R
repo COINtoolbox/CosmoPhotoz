@@ -39,6 +39,8 @@ shinyUI(fluidPage(theme = "bootstrapblue.css",
                z-index: 105;
              }
           ")),
+    
+    
            conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                             tags$div("Calculating... you can get a coffee.", id="loadmessage")),
 
@@ -61,7 +63,7 @@ shinyUI(fluidPage(theme = "bootstrapblue.css",
                      "Inverse Gaussian" = "inverse.gaussian")),
 
     br(), 
-    submitButton("Run analysis"),
+    submitButton("Run analysis", icon("refresh")),
     br(),
     downloadButton('downloadData', 'Download photoZ results')
   ),
@@ -75,8 +77,8 @@ shinyUI(fluidPage(theme = "bootstrapblue.css",
       tabPanel("Box", plotOutput("box")),
       tabPanel("Prediction", plotOutput("predictObs")), 
       tabPanel("Diagnostics", verbatimTextOutput("diagnostics")),
+      tabPanel('Photo-z',dataTableOutput("photoz_out")),
       tabPanel("Copyright", includeMarkdown("Copyright.md")),
       tabPanel("COIN", includeMarkdown("COIN.md"))
-    )
-  )
+    ))
 ))

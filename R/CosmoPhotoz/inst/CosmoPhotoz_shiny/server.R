@@ -78,7 +78,7 @@ shinyServer(function(input, output) {
       }
 
     # Time to return the data!
-    return(data.frame(photoz, specz))
+    return(data.frame(photoz=photoz$photoz, err_photoz= photoz$err_photoz, specz))
   })
 
   # Create the output text
@@ -128,9 +128,22 @@ shinyServer(function(input, output) {
     content = function(file) {
       tempObj <- shinyCompPhotoZ()
       if(!is.null(tempObj)) {
-        write.table(tempObj$photoz, file, quote=F, sep=" ", col.names = FALSE, row.names = FALSE)
+        photozObs<-data.frame(photoz=tempObj$photoz,err_photoz=tempObj$err_photoz)
+        write.table(photozObs, file, quote=F, sep=" ", row.names = FALSE)
       } 
     }
   )
+# Display results
+photozObs<-reactive({
+  tempObj <- shinyCompPhotoZ()
+  if(!is.null(tempObj)) {
+    photozObs<-data.frame(photoz=tempObj$photoz,err_photoz=tempObj$err_photoz)
+    
+  } 
+})
+
+  output$photoz_out<-renderDataTable(
+    photozObs()
+    )
 
 })

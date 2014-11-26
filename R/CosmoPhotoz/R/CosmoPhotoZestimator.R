@@ -26,7 +26,7 @@
 #' @param method a string containing the chosen GLM method. Two options are available: \code{Frequentist} will use the function  \code{\link{glm}} from the package \code{stats}; \code{Bayesian} will use the function \code{\link{bayesglm}} from the package \code{arm}
 #' @param family a string containing \code{gamma} or \code{inverse.gaussian} (a description of the error distribution and link function to be used in the model)
 #' @param robust a boolean indicating if robust PCA should be used or not
-#' @return a vector with the estimated photometric redshifts
+#' @return a list with the estimated photometric redshifts and errors
 #' @examples
 #' \dontrun{
 #' # Load the data
@@ -64,8 +64,11 @@ CosmoPhotoZestimator <- function(trainData, testData, numberOfPcs=4, method="Bay
   Fit <- glmTrainPhotoZ(Trainpc, formula=eval(parse(text=formM)), 
                         method=method, family=family)
 
-  # Photo-z estimation
-  photoz <- predict(Fit$glmfit, newdata=Testpc, type="response")
+  # Predict 
   
-  return(photoz)
+  # Photo-z estimation
+  photoz_temp <- predict(Fit$glmfit, newdata=Testpc, type="response", se.fit = TRUE)
+  photoz <- photoz_temp$fit
+  err_photoz <- photoz_temp$se.fit
+  return(list(photoz=photoz, err_photoz=err_photoz))
 }
