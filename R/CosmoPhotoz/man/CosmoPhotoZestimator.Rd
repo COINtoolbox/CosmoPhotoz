@@ -19,7 +19,7 @@ CosmoPhotoZestimator(trainData, testData, numberOfPcs, method, family, robust)
 \item{robust}{a boolean indicating if robust PCA should be used or not}
 }
 \value{
-a vector with the estimated photometric redshifts
+a list with the estimated photometric redshifts and errors
 }
 \description{
 \code{CosmoPhotoZestimator} returns photometric redshift estimated from photometric
