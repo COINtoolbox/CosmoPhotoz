@@ -15,7 +15,7 @@
 #
 
 library(shiny)
-library(CosmoPhotoz)
+require(CosmoPhotoz)
 library(ggplot2)
 library(ggthemes)
 library(shinyIncubator)
