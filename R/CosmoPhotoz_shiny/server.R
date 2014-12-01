@@ -19,6 +19,7 @@ require(CosmoPhotoz)
 library(ggplot2)
 library(ggthemes)
 library(shinyIncubator)
+source("CosmoPhotoZestimator2.R")
 options(shiny.maxRequestSize=100*1024^2) # This is to change the maximum size of the upload to 30 MB
 
 shinyServer(function(input, output) {
@@ -67,7 +68,7 @@ shinyServer(function(input, output) {
       }
 
       # Photo-z estimation
-      photoz <- CosmoPhotoZestimator(trainData=PHAT0train, testData=PHAT0test, 
+      photoz <- CosmoPhotoZestimator2(trainData=PHAT0train, testData=PHAT0test, 
                                      numberOfPcs=nPc, method=input$method,
                                      family=input$family, robust=input$useRobustPCA)
 
