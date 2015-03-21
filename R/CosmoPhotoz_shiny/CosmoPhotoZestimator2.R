@@ -19,8 +19,19 @@ CosmoPhotoZestimator2 <- function(trainData, testData, numberOfPcs=4, method="Ba
   # Predict 
   
   # Photo-z estimation
-  photoz_temp <- predict(Fit$glmfit, newdata=Testpc, type="response", se.fit = TRUE)
+  photoz_temp <- predict(Fit$glmfit, newdata=Testpc, type="link", se.fit = TRUE)
   photoz <- photoz_temp$fit
-  err_photoz <- photoz_temp$se.fit
-  return(list(photoz=photoz, err_photoz=err_photoz))
+  # Error 
+  critval <- 1.96 ## approx 95% CI
+  upr <- photoz_temp$fit + (critval * photoz_temp$se.fit)
+  lwr <- photoz_temp$fit - (critval * photoz_temp$se.fit)
+  fit <-  photoz_temp$fit
+  
+  fit2 <- Fit$glmfit$family$linkinv(fit)
+  upr2 <- Fit$glmfit$family$linkinv(upr)
+  lwr2 <- Fit$glmfit$family$linkinv(lwr)
+  errup<-upr2-fit2
+  errlow<-fit2-lwr2
+
+  return(list(photoz=round(fit2,4), errup_photoz=round(upr2,4),errlow_photoz=round(lwr2,4)))
 }

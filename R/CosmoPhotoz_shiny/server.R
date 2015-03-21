@@ -79,7 +79,8 @@ shinyServer(function(input, output) {
       }
 
     # Time to return the data!
-    return(data.frame(photoz=photoz$photoz, err_photoz= photoz$err_photoz, specz))
+    return(data.frame(photoz=photoz$photoz, errup_photoz= photoz$errup_photoz,errlow_photoz= photoz$errlow_photoz,
+                      specz))
   })
 
   # Create the output text
@@ -129,7 +130,8 @@ shinyServer(function(input, output) {
     content = function(file) {
       tempObj <- shinyCompPhotoZ()
       if(!is.null(tempObj)) {
-        photozObs<-data.frame(photoz=tempObj$photoz,err_photoz=tempObj$err_photoz)
+        photozObs<-data.frame(photoz=tempObj$photoz,errup_photoz=tempObj$errup_photoz,
+                              errlow_photoz=tempObj$errlow_photoz)
         write.table(photozObs, file, quote=F, sep=" ", row.names = FALSE)
       } 
     }
@@ -138,7 +140,8 @@ shinyServer(function(input, output) {
 photozObs<-reactive({
   tempObj <- shinyCompPhotoZ()
   if(!is.null(tempObj)) {
-    photozObs<-data.frame(photoz=tempObj$photoz,err_photoz=tempObj$err_photoz)
+    photozObs<-data.frame(specz=tempObj$specz,photoz=tempObj$photoz,photoz_up=tempObj$errup_photoz,
+                          photoz_down=tempObj$errlow_photoz)
     
   } 
 })
